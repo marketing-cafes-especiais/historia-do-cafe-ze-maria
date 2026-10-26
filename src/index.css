@@ -107,7 +107,7 @@ button { color: inherit; }
 .contained { max-width: 1120px; margin: auto; padding: 80px 20px; }
 
 .hero {
-  min-height: 100svh; padding: 140px 20px 40px; display: grid; align-items: center;
+  min-height: 100svh; padding: 140px 20px 115px; display: grid; align-items: center;
   max-width: 1240px; margin: auto; gap: 48px;
 }
 .hero-text { max-width: 640px; }
@@ -295,7 +295,7 @@ button { color: inherit; }
   .desktop-nav { display: flex; }
   .page-section { scroll-margin-top: 72px; }
   .contained { padding: 110px 36px; }
-  .hero { padding: 120px 36px 50px; grid-template-columns: 1.1fr .9fr; gap: 60px; }
+  .hero { padding: 120px 36px 125px; grid-template-columns: 1.1fr .9fr; gap: 60px; }
   .hero-art { min-height: 650px; }
   .fact-grid { grid-template-columns: repeat(2, 1fr); }
   .fact-card { min-height: 220px; }
