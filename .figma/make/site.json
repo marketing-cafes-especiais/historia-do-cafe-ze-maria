@@ -1,0 +1,11 @@
+{
+  "title": "História Café Zé Maria",
+  "description": "Access curated coffee brewing methods recommended by expert baristas through a QR code, enhancing your coffee experience with easy-to-follow guides.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
