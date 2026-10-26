@@ -5,7 +5,7 @@ import heroFoto11 from "./assets/hero-bg-11.jpg"
 import colhedorCafe from "./assets/ficha-colhedor.jpg"
 
 // Monta o caminho de uma imagem da pasta public/ respeitando o subdiretório
-// de publicação (necessário no GitHub Pages, ex: /claudinhocode/).
+// de publicação (necessário no GitHub Pages, ex: /historia-do-cafe-ze-maria/).
 const publicAsset = (path: string) => `${import.meta.env.BASE_URL}${path}`
 
 // Adicione mais imagens aqui para o fundo da abertura alternar automaticamente.
