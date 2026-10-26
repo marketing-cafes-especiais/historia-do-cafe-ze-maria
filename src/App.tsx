@@ -3,6 +3,7 @@ import zeMariaCafeEspecialLogo from "./assets/logo-ze-maria-cafe-especial.png"
 import heroFoto8 from "./assets/hero-bg-8.jpg"
 import heroFoto11 from "./assets/hero-bg-11.jpg"
 import colhedorCafe from "./assets/ficha-colhedor.jpg"
+import paisagemItaguacu from "./assets/itaguacu-paisagem.jpg"
 
 // Monta o caminho de uma imagem da pasta public/ respeitando o subdiretório
 // de publicação (necessário no GitHub Pages, ex: /historia-do-cafe-ze-maria/).
@@ -515,8 +516,8 @@ function App() {
         </ol>
         <figure className="origin-landscape">
           <img
-            src="https://images.unsplash.com/photo-1646753555452-cf31c0f86159?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=85&w=1600"
-            alt="Montanhas e lavouras de café no Brasil"
+            src={paisagemItaguacu}
+            alt="Vista de Itaguaçu, com a igreja e o morro ao fundo"
           />
           <figcaption>
             <span>Itaguaçu, Espírito Santo</span>
