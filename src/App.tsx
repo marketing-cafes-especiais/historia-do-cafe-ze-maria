@@ -17,7 +17,7 @@ const heroImages = [
 
 // Cole aqui o link de incorporação do YouTube quando o vídeo estiver pronto,
 // ex: "https://www.youtube.com/embed/SEU_ID_AQUI". Deixe vazio para manter a prévia.
-const historyVideoEmbedUrl = ""
+const historyVideoEmbedUrl = "https://www.youtube.com/embed/3saVBpGPTbc"
 
 const sections = [
   ["historia", "História"],
