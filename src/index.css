@@ -594,14 +594,15 @@ main { background: var(--paper); }
   border-color: transparent; background: transparent; color: rgba(255,255,255,.8);
 }
 .hero-art {
-  position: absolute; right: 34px; bottom: 34px; z-index: 4;
-  width: 130px; min-height: 0; height: 130px; overflow: visible;
+  position: absolute; left: 50%; bottom: 34px; z-index: 4;
+  width: 170px; min-height: 0; height: 170px; overflow: visible;
   border: 0; border-radius: 50%; box-shadow: none; background: transparent;
+  transform: translateX(-50%);
 }
 .hero-art > img { display: none; }
 .hero-art::after { display: none; }
 .hero-art .sun {
-  position: static; width: 130px; height: 130px; transform: none;
+  position: static; width: 170px; height: 170px; transform: none;
   border: 1px solid rgba(255,255,255,.7); box-shadow: 0 12px 40px rgba(0,0,0,.3);
 }
 
@@ -799,8 +800,8 @@ main { background: var(--paper); }
   .hero { padding-top: 150px; }
   .hero::before { inset: 12px; }
   .hero h1 { font-size: clamp(44px, 15vw, 68px); }
-  .hero-art { right: 22px; bottom: 22px; width: 88px; height: 88px; }
-  .hero-art .sun { width: 88px; height: 88px; }
+  .hero-art { bottom: 22px; width: 108px; height: 108px; }
+  .hero-art .sun { width: 108px; height: 108px; }
   #ficha .fact-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   #ficha .fact-card, #ficha .fact-card.featured { padding: 16px; }
   #ficha .fact-card > svg { width: 20px; height: 20px; margin-bottom: 8px; }
