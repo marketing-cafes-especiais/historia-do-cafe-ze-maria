@@ -82,8 +82,12 @@ button { color: inherit; }
 .brand-mark img { width: 42px; height: 42px; object-fit: contain; }
 
 .desktop-nav { display: none; align-items: center; gap: 22px; }
-.desktop-nav a { font-size: 12px; font-weight: 700; color: var(--muted); transition: color .2s; }
+.desktop-nav a {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 700; color: var(--muted); transition: color .2s;
+}
 .desktop-nav a:hover { color: var(--copper); }
+.desktop-nav span { color: var(--copper); font-size: 10px; }
 
 .theme-button {
   width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 50%;

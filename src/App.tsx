@@ -158,8 +158,9 @@ function App() {
             <Brand compact />
           </a>
           <nav aria-label="Navegação principal" className="desktop-nav">
-            {sections.map(([id, label]) => (
+            {sections.map(([id, label], index) => (
               <a key={id} href={`#${id}`}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
                 {label}
               </a>
             ))}
