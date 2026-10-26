@@ -4,6 +4,10 @@ import heroFoto8 from "./assets/hero-bg-8.jpg"
 import heroFoto11 from "./assets/hero-bg-11.jpg"
 import colhedorCafe from "./assets/ficha-colhedor.jpg"
 
+// Monta o caminho de uma imagem da pasta public/ respeitando o subdiretório
+// de publicação (necessário no GitHub Pages, ex: /claudinhocode/).
+const publicAsset = (path: string) => `${import.meta.env.BASE_URL}${path}`
+
 // Adicione mais imagens aqui para o fundo da abertura alternar automaticamente.
 const heroImages = [
   heroFoto8,
@@ -238,13 +242,13 @@ function App() {
           aria-label="Cafezal nas montanhas com o selo Melhor Café 2020"
         >
           <img
-            src="/cafe-montanhas.jpg"
+            src={publicAsset("cafe-montanhas.jpg")}
             alt="Cafezal carregado de frutos nas montanhas"
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="sun overflow-hidden p-0">
             <img
-              src="/selo-melhor-cafe-2025.png"
+              src={publicAsset("selo-melhor-cafe-2025.png")}
               alt="Coffee of the Year Brasil — Melhor Café 2025"
               className="h-full w-full rounded-full object-cover"
             />
@@ -274,7 +278,7 @@ function App() {
                 aria-label="Prévia do vídeo sobre a história do Café Zé Maria"
               >
                 <img
-                  src="/cafe-montanhas.jpg"
+                  src={publicAsset("cafe-montanhas.jpg")}
                   alt=""
                   className="story-video-image"
                 />
