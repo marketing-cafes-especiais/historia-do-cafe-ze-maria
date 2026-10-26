@@ -81,9 +81,10 @@ button { color: inherit; }
 }
 .brand-mark img { width: 42px; height: 42px; object-fit: contain; }
 
-.desktop-nav { display: none; align-items: center; gap: 22px; }
+.desktop-nav { display: none; align-items: center; gap: 10px; }
 .desktop-nav a {
-  display: inline-flex; align-items: center; gap: 6px;
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--card);
   font-size: 12px; font-weight: 700; color: var(--muted); transition: color .2s;
 }
 .desktop-nav a:hover { color: var(--copper); }
@@ -320,7 +321,7 @@ button { color: inherit; }
 
 @media (min-width: 1050px) {
   .fact-grid { grid-template-columns: repeat(4, 1fr); }
-  .desktop-nav { gap: 28px; }
+  .desktop-nav { gap: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -369,8 +370,10 @@ main { background: var(--paper); }
   color: var(--cream);
 }
 .topbar .brand-mark { border: 2px solid var(--cream); }
-.desktop-nav a { color: color-mix(in srgb, var(--cream) 72%, transparent); }
-.desktop-nav a:hover { color: var(--cream); }
+.desktop-nav a {
+  border-color: rgba(245,236,215,.25); background: var(--cream); color: var(--forest-deep);
+}
+.desktop-nav a:hover { color: var(--copper); }
 .theme-button { border-color: rgba(245,236,215,.32); background: transparent; color: var(--cream); }
 .mobile-nav a { border-color: rgba(245,236,215,.25); background: var(--cream); color: var(--forest-deep); }
 .mobile-nav span { color: var(--copper); }
