@@ -107,7 +107,7 @@ button { color: inherit; }
 .contained { max-width: 1120px; margin: auto; padding: 80px 20px; }
 
 .hero {
-  min-height: 100svh; padding: 140px 20px 115px; display: grid; align-items: center;
+  min-height: 100svh; padding: 140px 20px 40px; display: grid; align-items: center;
   max-width: 1240px; margin: auto; gap: 48px;
 }
 .hero-text { max-width: 640px; }
@@ -295,7 +295,7 @@ button { color: inherit; }
   .desktop-nav { display: flex; }
   .page-section { scroll-margin-top: 72px; }
   .contained { padding: 110px 36px; }
-  .hero { padding: 120px 36px 125px; grid-template-columns: 1.1fr .9fr; gap: 60px; }
+  .hero { padding: 120px 36px 50px; grid-template-columns: 1.1fr .9fr; gap: 60px; }
   .hero-art { min-height: 650px; }
   .fact-grid { grid-template-columns: repeat(2, 1fr); }
   .fact-card { min-height: 220px; }
@@ -594,10 +594,9 @@ main { background: var(--paper); }
   border-color: transparent; background: transparent; color: rgba(255,255,255,.8);
 }
 .hero-art {
-  position: absolute; left: 50%; bottom: 34px; z-index: 4;
+  position: relative; z-index: 4; margin-top: 28px;
   width: 170px; min-height: 0; height: 170px; overflow: visible;
   border: 0; border-radius: 50%; box-shadow: none; background: transparent;
-  transform: translateX(-50%);
 }
 .hero-art > img { display: none; }
 .hero-art::after { display: none; }
@@ -800,7 +799,7 @@ main { background: var(--paper); }
   .hero { padding-top: 150px; }
   .hero::before { inset: 12px; }
   .hero h1 { font-size: clamp(44px, 15vw, 68px); }
-  .hero-art { bottom: 22px; width: 108px; height: 108px; }
+  .hero-art { width: 108px; height: 108px; }
   .hero-art .sun { width: 108px; height: 108px; }
   #ficha .fact-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   #ficha .fact-card, #ficha .fact-card.featured { padding: 16px; }
