@@ -35,8 +35,8 @@ const sections = [
 const CONCURSO_FORM_ENDPOINT = ""
 
 // Período de inscrição do concurso cultural (horário de Brasília).
-const CONCURSO_INICIO = new Date("2020-01-01T00:00:00-03:00")
-const CONCURSO_FIM = new Date("2030-01-01T00:00:00-03:00")
+const CONCURSO_INICIO = new Date("2026-11-15T00:00:00-03:00")
+const CONCURSO_FIM = new Date("2027-01-05T23:59:59-03:00")
 
 type ConcursoFase = "antes" | "aberto" | "depois"
 
