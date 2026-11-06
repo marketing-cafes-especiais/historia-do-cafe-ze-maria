@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react"
+import { useEffect, useState, type FormEvent, type ReactNode } from "react"
 import zeMariaCafeEspecialLogo from "./assets/logo-ze-maria-cafe-especial.png"
 import heroFoto8 from "./assets/hero-bg-8.jpg"
 import heroFoto11 from "./assets/hero-bg-11.jpg"
@@ -26,8 +26,350 @@ const sections = [
   ["producao", "Produção"],
   ["xicara", "Na xícara"],
   ["preparo", "Como preparar"],
+  ["concurso", "Concurso cultural"],
   ["contato", "Contato"],
 ] as const
+
+// Cole aqui a URL do seu Google Apps Script (Web App) depois de publicá-lo.
+// Veja o passo a passo que a Claude te deu para criar essa URL.
+const CONCURSO_FORM_ENDPOINT = ""
+
+// Período de inscrição do concurso cultural (horário de Brasília).
+const CONCURSO_INICIO = new Date("2026-11-15T00:00:00-03:00")
+const CONCURSO_FIM = new Date("2027-01-05T23:59:59-03:00")
+
+type ConcursoFase = "antes" | "aberto" | "depois"
+
+function getConcursoFase(agora: Date): ConcursoFase {
+  if (agora < CONCURSO_INICIO) return "antes"
+  if (agora > CONCURSO_FIM) return "depois"
+  return "aberto"
+}
+
+const formatarData = (data: Date) =>
+  data.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" })
+
+type ConcursoEnvioStatus = "idle" | "enviando" | "sucesso" | "duplicado" | "erro"
+
+function ConcursoCultural() {
+  const [fase] = useState<ConcursoFase>(() => getConcursoFase(new Date()))
+  const [regulamentoAberto, setRegulamentoAberto] = useState(false)
+  const [status, setStatus] = useState<ConcursoEnvioStatus>("idle")
+  const [mensagemErro, setMensagemErro] = useState("")
+  const [erros, setErros] = useState<Record<string, string>>({})
+  const [form, setForm] = useState({
+    nome: "",
+    email: "",
+    whatsapp: "",
+    instagram: "",
+    cidadeUf: "",
+    resposta: "",
+    aceiteRegulamento: false,
+    consentimentoLgpd: false,
+    aceitaNovidades: false,
+  })
+
+  const atualizarCampo = (campo: keyof typeof form, valor: string | boolean) => {
+    setForm((atual) => ({ ...atual, [campo]: valor }))
+  }
+
+  const validar = () => {
+    const novosErros: Record<string, string> = {}
+    if (!form.nome.trim()) novosErros.nome = "Informe seu nome completo."
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      novosErros.email = "Informe um e-mail válido."
+    }
+    if (form.whatsapp.replace(/\D/g, "").length < 10) {
+      novosErros.whatsapp = "Informe um WhatsApp válido, com DDD."
+    }
+    if (!form.cidadeUf.trim()) novosErros.cidadeUf = "Informe sua cidade e UF."
+    if (!form.resposta.trim()) novosErros.resposta = "Escreva sua resposta."
+    if (form.resposta.length > 1000) novosErros.resposta = "A resposta passou de 1000 caracteres."
+    if (!form.aceiteRegulamento) novosErros.aceiteRegulamento = "Você precisa aceitar o regulamento."
+    if (!form.consentimentoLgpd) novosErros.consentimentoLgpd = "Você precisa aceitar o uso dos seus dados."
+    setErros(novosErros)
+    return Object.keys(novosErros).length === 0
+  }
+
+  const enviar = async (evento: FormEvent) => {
+    evento.preventDefault()
+    if (fase !== "aberto") return
+    if (!validar()) return
+
+    setStatus("enviando")
+    setMensagemErro("")
+    try {
+      const resposta = await fetch(CONCURSO_FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(form),
+      })
+      const dados = await resposta.json()
+      if (dados.status === "ok") {
+        setStatus("sucesso")
+      } else if (dados.status === "duplicado") {
+        setStatus("duplicado")
+      } else {
+        setStatus("erro")
+        setMensagemErro(dados.message || "Não foi possível enviar. Tente novamente.")
+      }
+    } catch {
+      setStatus("erro")
+      setMensagemErro("Não foi possível enviar. Verifique sua internet e tente novamente.")
+    }
+  }
+
+  return (
+    <section id="concurso" className="page-section contained">
+      <SectionTitle
+        number="06"
+        eyebrow="Concurso cultural"
+        title="Conte como você prepara o seu café."
+      >
+        Participe contando qual é o seu método de preparo favorito e por quê.
+        Sem necessidade de compra — o ganhador é escolhido pela criatividade da resposta.
+      </SectionTitle>
+
+      <div className="concurso-grid">
+        <div className="concurso-info">
+          <div className="concurso-fact">
+            <p>Inscrições</p>
+            <strong>{formatarData(CONCURSO_INICIO)} a {formatarData(CONCURSO_FIM)}</strong>
+          </div>
+          <div className="concurso-fact">
+            <p>Resultado</p>
+            <strong>12/01/2027, no Instagram @cafezemaria</strong>
+          </div>
+          <div className="concurso-fact">
+            <p>Prêmio</p>
+            <strong>Kit barista completo para 1 ganhador(a)</strong>
+            <span>Moedor de grãos, prensa francesa, balança eletrônica, copo dosador e spray</span>
+          </div>
+          <p className="concurso-nota">
+            Seguir o Instagram @cafezemaria é um convite para acompanhar o resultado —
+            não é obrigatório e não conta ponto.
+          </p>
+        </div>
+
+        <div className="concurso-form-wrap">
+          {fase === "antes" && (
+            <div className="concurso-aviso">
+              As inscrições começam em {formatarData(CONCURSO_INICIO)}. Volte aqui nessa data para participar.
+            </div>
+          )}
+          {fase === "depois" && (
+            <div className="concurso-aviso">
+              As inscrições deste concurso terminaram em {formatarData(CONCURSO_FIM)}.
+              Acompanhe o resultado em 12/01/2027 no Instagram @cafezemaria.
+            </div>
+          )}
+
+          {fase === "aberto" && status === "sucesso" && (
+            <div className="concurso-sucesso">
+              Inscrição enviada! O resultado sai em 12/01/2027, no Instagram @cafezemaria.
+            </div>
+          )}
+
+          {fase === "aberto" && status === "duplicado" && (
+            <div className="concurso-aviso">
+              Já recebemos uma inscrição com esse e-mail ou WhatsApp. Cada pessoa participa uma única vez.
+            </div>
+          )}
+
+          {fase === "aberto" && status !== "sucesso" && status !== "duplicado" && (
+            <form className="concurso-form" onSubmit={enviar} noValidate>
+              <label>
+                Nome completo
+                <input
+                  type="text"
+                  value={form.nome}
+                  onChange={(e) => atualizarCampo("nome", e.target.value)}
+                  autoComplete="name"
+                />
+                {erros.nome && <span className="concurso-erro">{erros.nome}</span>}
+              </label>
+
+              <label>
+                E-mail
+                <input
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => atualizarCampo("email", e.target.value)}
+                  autoComplete="email"
+                />
+                {erros.email && <span className="concurso-erro">{erros.email}</span>}
+              </label>
+
+              <label>
+                WhatsApp (com DDD)
+                <input
+                  type="tel"
+                  value={form.whatsapp}
+                  onChange={(e) => atualizarCampo("whatsapp", e.target.value)}
+                  placeholder="(27) 99999-9999"
+                  autoComplete="tel"
+                />
+                {erros.whatsapp && <span className="concurso-erro">{erros.whatsapp}</span>}
+              </label>
+
+              <label>
+                @ do Instagram (opcional)
+                <input
+                  type="text"
+                  value={form.instagram}
+                  onChange={(e) => atualizarCampo("instagram", e.target.value)}
+                  placeholder="@seuusuario"
+                />
+              </label>
+
+              <label>
+                Cidade e UF
+                <input
+                  type="text"
+                  value={form.cidadeUf}
+                  onChange={(e) => atualizarCampo("cidadeUf", e.target.value)}
+                  placeholder="Vila Velha, ES"
+                />
+                {erros.cidadeUf && <span className="concurso-erro">{erros.cidadeUf}</span>}
+              </label>
+
+              <label>
+                Qual é o seu método de preparo favorito e por quê?
+                <textarea
+                  value={form.resposta}
+                  onChange={(e) => atualizarCampo("resposta", e.target.value.slice(0, 1000))}
+                  maxLength={1000}
+                  rows={5}
+                />
+                <span className="concurso-contador">{form.resposta.length}/1000</span>
+                {erros.resposta && <span className="concurso-erro">{erros.resposta}</span>}
+              </label>
+
+              <label className="concurso-checkbox">
+                <input
+                  type="checkbox"
+                  checked={form.aceiteRegulamento}
+                  onChange={(e) => atualizarCampo("aceiteRegulamento", e.target.checked)}
+                />
+                <span>
+                  Tenho 18 anos ou mais e li e aceito o{" "}
+                  <button
+                    type="button"
+                    className="concurso-link-regulamento"
+                    onClick={() => setRegulamentoAberto(true)}
+                  >
+                    regulamento
+                  </button>
+                  .
+                </span>
+              </label>
+              {erros.aceiteRegulamento && <span className="concurso-erro">{erros.aceiteRegulamento}</span>}
+
+              <label className="concurso-checkbox">
+                <input
+                  type="checkbox"
+                  checked={form.consentimentoLgpd}
+                  onChange={(e) => atualizarCampo("consentimentoLgpd", e.target.checked)}
+                />
+                <span>
+                  Autorizo o uso dos meus dados para participação neste concurso, conforme a LGPD.
+                </span>
+              </label>
+              {erros.consentimentoLgpd && <span className="concurso-erro">{erros.consentimentoLgpd}</span>}
+
+              <label className="concurso-checkbox">
+                <input
+                  type="checkbox"
+                  checked={form.aceitaNovidades}
+                  onChange={(e) => atualizarCampo("aceitaNovidades", e.target.checked)}
+                />
+                <span>Quero receber novidades da Zé Maria.</span>
+              </label>
+
+              {status === "erro" && <div className="concurso-erro-envio">{mensagemErro}</div>}
+
+              <button type="submit" className="concurso-submit" disabled={status === "enviando"}>
+                {status === "enviando" ? "Enviando..." : "Participar do concurso"}
+              </button>
+            </form>
+          )}
+        </div>
+      </div>
+
+      <details
+        className="concurso-regulamento"
+        open={regulamentoAberto}
+        onToggle={(e) => setRegulamentoAberto((e.target as HTMLDetailsElement).open)}
+      >
+        <summary>Ver regulamento</summary>
+        <div className="concurso-regulamento-texto">
+          <p><strong>1. Empresa promotora.</strong> Cafe Ze Maria LTDA, CNPJ 11.756.868/0001-32.</p>
+          <p><strong>2. Período de participação.</strong> De 15/11/2026 a 05/01/2027.</p>
+          <p>
+            <strong>3. Quem pode participar.</strong> Pessoas maiores de 18 anos, residentes no
+            Brasil. Não podem participar funcionários da Zé Maria e seus familiares.
+          </p>
+          <p>
+            <strong>4. Como participar.</strong> Pelo formulário desta página, respondendo à
+            pergunta "Qual é o seu método de preparo favorito e por quê?". A participação é
+            gratuita, sem necessidade de compra, e cada pessoa pode participar uma única vez.
+          </p>
+          <p>
+            <strong>5. Critérios de julgamento.</strong> As respostas serão avaliadas por
+            criatividade, originalidade e adequação ao tema, por uma comissão interna da Zé
+            Maria. Este é um concurso cultural: o ganhador é escolhido por mérito, com base na
+            qualidade da resposta enviada. A comissão também define o 2º e o 3º colocados como suplentes.
+          </p>
+          <p>
+            <strong>6. Prêmio.</strong> Um kit barista para 1 (um) ganhador, composto por moedor
+            de grãos de café, prensa francesa, balança eletrônica, copo dosador e spray. O prêmio
+            não pode ser trocado por dinheiro.
+          </p>
+          <p>
+            <strong>7. Resultado.</strong> Divulgado em 12/01/2027, no Instagram @cafezemaria.
+          </p>
+          <p>
+            <strong>8. Contato com o ganhador.</strong> A Zé Maria entrará em contato por
+            WhatsApp e e-mail no dia do resultado, solicitando nome completo, CEP, endereço,
+            número, complemento, cidade, estado e telefone para entrega. O ganhador tem 5 (cinco)
+            dias úteis para responder; sem resposta nesse prazo, o prêmio passa ao suplente seguinte.
+          </p>
+          <p>
+            <strong>9. Entrega.</strong> O prêmio será enviado pelos Correios, com frete pago pela
+            Zé Maria.
+          </p>
+          <p>
+            <strong>10. Desclassificação.</strong> Serão desclassificadas respostas ofensivas,
+            cópias de outros textos (plágio), ou cadastros com dados falsos ou incompletos.
+          </p>
+          <p>
+            <strong>11. Uso da resposta.</strong> Ao participar, você autoriza a Zé Maria a
+            divulgar sua resposta e seu nome em seus canais, caso seja a pessoa ganhadora.
+          </p>
+          <p>
+            <strong>12. LGPD.</strong> Coletamos nome, e-mail, WhatsApp, Instagram (se informado),
+            cidade/UF e sua resposta, apenas para viabilizar a participação neste concurso e, caso
+            você autorize no formulário, para enviar novidades da marca. Os dados ficam guardados
+            pelo tempo necessário para a apuração do concurso e entrega do prêmio, e são
+            removidos depois disso. Para pedir a exclusão dos seus dados antes disso, escreva para{" "}
+            <a href="mailto:pamela.soares@bodenclub.com.br">pamela.soares@bodenclub.com.br</a>.
+          </p>
+          <p>
+            <strong>13. Instagram.</strong> Seguir o perfil @cafezemaria é opcional, serve apenas
+            para acompanhar o resultado, e não influencia o julgamento.
+          </p>
+          <p>
+            <strong>14. Disposições gerais.</strong> A participação neste concurso implica a
+            aceitação total deste regulamento. Dúvidas podem ser enviadas para{" "}
+            <a href="mailto:pamela.soares@bodenclub.com.br">pamela.soares@bodenclub.com.br</a>.
+          </p>
+        </div>
+      </details>
+
+      <SectionNav previous="preparo" next="contato" nextLabel="Falar com a gente" />
+    </section>
+  )
+}
 
 const Icon = ({
   children,
@@ -637,8 +979,10 @@ function App() {
             ))}
           </div>
         </div>
-        <SectionNav previous="xicara" next="contato" nextLabel="Falar com a gente" />
+        <SectionNav previous="xicara" next="concurso" nextLabel="Concurso cultural" />
       </section>
+
+      <ConcursoCultural />
 
       <section id="contato" className="page-section contact-section">
         <div className="contained contact-grid">
