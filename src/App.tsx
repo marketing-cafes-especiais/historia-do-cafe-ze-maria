@@ -560,7 +560,7 @@ function App() {
             <span className="!font-medium">para a sua xícara.</span>
           </h1>
           <p className="hero-copy">
-            Você acaba de receber o café&nbsp;&nbsp;Zé Maria na embalagem da Boden Club. Agora, chegue mais perto:
+            Você acaba de receber o café Zé Maria. Agora, chegue mais perto:
             conheça o caminho do café, da lavoura ao seu jeito de preparar.
           </p>
           <div className="hero-actions">
