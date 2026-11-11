@@ -268,6 +268,16 @@ function ConcursoCultural() {
                 />
               </label>
 
+              <a
+                href="https://www.instagram.com/cafezemaria/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="concurso-instagram"
+              >
+                Seguir @cafezemaria no Instagram
+                <Icon className="h-4 w-4"><path d="M7 17 17 7M7 7h10v10" /></Icon>
+              </a>
+
               <label>
                 Cidade e UF
                 <input
