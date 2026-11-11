@@ -145,7 +145,7 @@ button { color: inherit; }
   background: var(--card); color: var(--ink); font-size: 11px;
 }
 .hero-actions .preparation-button.compact {
-  margin-top: 0; padding: 9px 14px; font-size: 11px;
+  margin-top: 0; padding: 12px 18px; font-size: 12px;
 }
 
 .hero-art {
@@ -598,6 +598,11 @@ main { background: var(--paper); }
   border: 1px solid rgba(255,255,255,.7); background: transparent; box-shadow: none; color: #fff;
 }
 .hero-actions .preparation-button:not(.compact) { background: rgba(255,255,255,.14); }
+.hero-actions .preparation-button.kit {
+  margin-top: 0; min-width: 256px;
+  border-color: #e2ab3e; background: #e2ab3e; color: #2a1a0c;
+}
+.hero-actions .preparation-button.kit:hover { filter: brightness(1.06); }
 .hero-actions .primary-button {
   border-color: transparent; background: transparent; color: rgba(255,255,255,.8);
 }
@@ -802,6 +807,95 @@ main { background: var(--paper); }
 .contact-logo { margin-inline: auto; }
 .contact-divider { background: rgba(33,75,58,.2); }
 .contact-mark > p { color: var(--forest-deep); }
+
+.concurso-grid { display: grid; gap: 28px; margin-top: 40px; }
+.concurso-info { display: flex; flex-direction: column; gap: 14px; }
+.concurso-fact {
+  padding: 16px 18px; border: 1px solid var(--forest); border-radius: 4px;
+  box-shadow: 5px 5px 0 color-mix(in srgb, var(--caramel) 55%, transparent);
+}
+.concurso-fact p {
+  margin: 0 0 4px; color: var(--copper); font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .15em;
+}
+.concurso-fact strong { display: block; font-size: 15px; }
+.concurso-fact span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
+.concurso-nota { margin: 4px 0 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.concurso-instagram {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  align-self: flex-start; margin-top: 10px; padding: 10px 16px; border: 1px solid var(--forest);
+  border-radius: 999px; background: transparent; color: var(--forest); font-size: 12px;
+  font-weight: 700;
+}
+.concurso-instagram:hover { background: var(--forest); color: var(--cream); }
+
+.concurso-form-wrap { min-width: 0; }
+.concurso-aviso, .concurso-sucesso {
+  padding: 18px 20px; border-radius: 4px; font-size: 14px; line-height: 1.6;
+}
+.concurso-aviso { border: 1px solid var(--forest); background: var(--card); color: var(--ink); }
+.concurso-sucesso { border: 1px solid var(--forest); background: var(--forest); color: var(--cream); }
+
+.concurso-form { display: flex; flex-direction: column; gap: 16px; }
+.concurso-form label {
+  display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700;
+  color: var(--ink); text-transform: uppercase; letter-spacing: .08em;
+}
+.concurso-form input[type="text"],
+.concurso-form input[type="email"],
+.concurso-form input[type="tel"],
+.concurso-form textarea {
+  padding: 11px 13px; border: 1px solid var(--line); border-radius: 4px; background: var(--card);
+  color: var(--ink); font-size: 14px; font-weight: 400; text-transform: none; letter-spacing: normal;
+  font-family: inherit;
+}
+.concurso-form textarea { resize: vertical; min-height: 100px; }
+.concurso-form input[type="file"] {
+  padding: 9px 0; color: var(--ink); font-size: 12px; font-weight: 400;
+  text-transform: none; letter-spacing: normal; font-family: inherit;
+}
+.concurso-nota-campo {
+  color: var(--muted); font-size: 11px; font-weight: 400; text-transform: none;
+  letter-spacing: normal; line-height: 1.5;
+}
+.concurso-contador {
+  align-self: flex-end; color: var(--muted); font-size: 11px; font-weight: 400;
+  text-transform: none; letter-spacing: normal;
+}
+.concurso-erro, .concurso-erro-envio {
+  color: #c0392b; font-size: 12px; font-weight: 400; text-transform: none; letter-spacing: normal;
+}
+.concurso-checkbox {
+  flex-direction: row !important; align-items: flex-start; gap: 10px !important;
+  font-size: 13px; font-weight: 400; text-transform: none; letter-spacing: normal; color: var(--muted);
+}
+.concurso-checkbox input { margin-top: 3px; flex: none; width: 16px; height: 16px; }
+.concurso-link-regulamento {
+  border: 0; background: none; padding: 0; color: var(--copper); font-weight: 700;
+  text-decoration: underline; cursor: pointer; font: inherit;
+}
+
+.concurso-submit {
+  align-self: flex-start; margin-top: 6px; padding: 14px 22px; border: 1px solid var(--forest);
+  border-radius: 999px; background: var(--forest); color: var(--cream); font-size: 13px;
+  font-weight: 700; text-transform: none; letter-spacing: normal; cursor: pointer;
+}
+.concurso-submit:disabled { opacity: .6; cursor: default; }
+.concurso-submit:not(:disabled):hover { background: var(--forest-deep); border-color: var(--forest-deep); }
+
+.concurso-regulamento { margin-top: 44px; border-top: 1px solid var(--line); padding-top: 22px; }
+.concurso-regulamento summary {
+  cursor: pointer; color: var(--copper); font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .15em;
+}
+.concurso-regulamento-texto { margin-top: 18px; color: var(--muted); font-size: 13px; line-height: 1.75; }
+.concurso-regulamento-texto p { margin: 0 0 14px; }
+.concurso-regulamento-texto strong { color: var(--ink); }
+.concurso-regulamento-texto a { color: var(--copper); text-decoration: underline; }
+
+@media (min-width: 850px) {
+  .concurso-grid { grid-template-columns: .9fr 1.1fr; align-items: start; }
+}
 
 @media (max-width: 699px) {
   .hero { padding-top: 150px; }
