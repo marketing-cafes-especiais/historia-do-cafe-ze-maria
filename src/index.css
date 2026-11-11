@@ -599,7 +599,8 @@ main { background: var(--paper); }
 }
 .hero-actions .preparation-button:not(.compact) { background: rgba(255,255,255,.14); }
 .hero-actions .preparation-button.kit {
-  border-color: var(--copper); background: var(--copper); color: #2a1a0c;
+  margin-top: 0; min-width: 256px;
+  border-color: #e2ab3e; background: #e2ab3e; color: #2a1a0c;
 }
 .hero-actions .preparation-button.kit:hover { filter: brightness(1.06); }
 .hero-actions .primary-button {
