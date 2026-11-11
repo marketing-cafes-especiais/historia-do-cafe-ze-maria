@@ -598,6 +598,10 @@ main { background: var(--paper); }
   border: 1px solid rgba(255,255,255,.7); background: transparent; box-shadow: none; color: #fff;
 }
 .hero-actions .preparation-button:not(.compact) { background: rgba(255,255,255,.14); }
+.hero-actions .preparation-button.kit {
+  border-color: var(--copper); background: var(--copper); color: #2a1a0c;
+}
+.hero-actions .preparation-button.kit:hover { filter: brightness(1.06); }
 .hero-actions .primary-button {
   border-color: transparent; background: transparent; color: rgba(255,255,255,.8);
 }
