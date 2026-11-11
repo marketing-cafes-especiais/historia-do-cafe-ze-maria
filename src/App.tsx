@@ -54,6 +54,7 @@ type ConcursoEnvioStatus = "idle" | "enviando" | "sucesso" | "duplicado" | "erro
 function ConcursoCultural() {
   const [fase] = useState<ConcursoFase>(() => getConcursoFase(new Date()))
   const [regulamentoAberto, setRegulamentoAberto] = useState(false)
+  const [lgpdAberto, setLgpdAberto] = useState(false)
   const [status, setStatus] = useState<ConcursoEnvioStatus>("idle")
   const [mensagemErro, setMensagemErro] = useState("")
   const [erros, setErros] = useState<Record<string, string>>({})
@@ -271,7 +272,15 @@ function ConcursoCultural() {
                   onChange={(e) => atualizarCampo("consentimentoLgpd", e.target.checked)}
                 />
                 <span>
-                  Autorizo o uso dos meus dados para participação neste concurso, conforme a LGPD.
+                  Autorizo o uso dos meus dados para participação neste concurso, conforme a{" "}
+                  <button
+                    type="button"
+                    className="concurso-link-regulamento"
+                    onClick={() => setLgpdAberto(true)}
+                  >
+                    LGPD
+                  </button>
+                  .
                 </span>
               </label>
               {erros.consentimentoLgpd && <span className="concurso-erro">{erros.consentimentoLgpd}</span>}
@@ -360,6 +369,49 @@ function ConcursoCultural() {
           <p>
             <strong>14. Disposições gerais.</strong> A participação neste concurso implica a
             aceitação total deste regulamento. Dúvidas podem ser enviadas para{" "}
+            <a href="mailto:pamela.soares@bodenclub.com.br">pamela.soares@bodenclub.com.br</a>.
+          </p>
+        </div>
+      </details>
+
+      <details
+        className="concurso-regulamento"
+        open={lgpdAberto}
+        onToggle={(e) => setLgpdAberto((e.target as HTMLDetailsElement).open)}
+      >
+        <summary>Ver política de privacidade (LGPD)</summary>
+        <div className="concurso-regulamento-texto">
+          <p>
+            <strong>Controlador dos dados.</strong> Cafe Ze Maria LTDA, CNPJ 11.756.868/0001-32.
+          </p>
+          <p>
+            <strong>Quais dados coletamos.</strong> Nome completo, e-mail, WhatsApp, @ do
+            Instagram (se informado), cidade/UF e a resposta que você enviar no formulário.
+          </p>
+          <p>
+            <strong>Para que usamos.</strong> Para viabilizar sua participação neste concurso
+            cultural — inscrição, contato em caso de ganho e divulgação do nome do ganhador — e,
+            somente se você marcar essa opção no formulário, para enviar novidades da marca Zé
+            Maria.
+          </p>
+          <p>
+            <strong>Base legal.</strong> O seu consentimento, dado ao marcar as caixinhas do
+            formulário.
+          </p>
+          <p>
+            <strong>Por quanto tempo guardamos.</strong> Pelo tempo necessário para a apuração do
+            concurso e entrega do prêmio. Depois disso, os dados são removidos — exceto se você
+            tiver autorizado o recebimento de novidades, caso em que ficam até você pedir a
+            remoção.
+          </p>
+          <p>
+            <strong>Compartilhamento.</strong> Seus dados não são vendidos nem compartilhados com
+            terceiros, exceto o necessário para o envio do prêmio pelos Correios, caso você seja a
+            pessoa ganhadora.
+          </p>
+          <p>
+            <strong>Seus direitos.</strong> Você pode pedir, a qualquer momento, a confirmação, a
+            correção ou a exclusão dos seus dados, escrevendo para{" "}
             <a href="mailto:pamela.soares@bodenclub.com.br">pamela.soares@bodenclub.com.br</a>.
           </p>
         </div>
