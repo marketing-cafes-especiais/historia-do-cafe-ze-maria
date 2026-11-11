@@ -570,10 +570,8 @@ function App() {
               </Icon>
             </a>
             <a href="#concurso" className="preparation-button kit">
+              <span aria-hidden="true">🎁</span>
               Quero ganhar o kit
-              <Icon className="h-4 w-4">
-                <path d="m9 18 6-6-6-6" />
-              </Icon>
             </a>
             <a href="#preparo" className="preparation-button compact">
               Como preparar
