@@ -58,6 +58,8 @@ function ConcursoCultural() {
   const [status, setStatus] = useState<ConcursoEnvioStatus>("idle")
   const [mensagemErro, setMensagemErro] = useState("")
   const [erros, setErros] = useState<Record<string, string>>({})
+  const [cupomArquivo, setCupomArquivo] = useState<File | null>(null)
+  const [cupomErro, setCupomErro] = useState("")
   const [form, setForm] = useState({
     nome: "",
     email: "",
@@ -73,6 +75,32 @@ function ConcursoCultural() {
   const atualizarCampo = (campo: keyof typeof form, valor: string | boolean) => {
     setForm((atual) => ({ ...atual, [campo]: valor }))
   }
+
+  const escolherCupom = (arquivo: File | null) => {
+    setCupomErro("")
+    if (!arquivo) {
+      setCupomArquivo(null)
+      return
+    }
+    const tiposAceitos = ["image/jpeg", "image/png", "image/webp", "image/heic", "application/pdf"]
+    if (!tiposAceitos.includes(arquivo.type)) {
+      setCupomErro("Envie uma imagem (jpg, png, webp) ou PDF.")
+      return
+    }
+    if (arquivo.size > 5 * 1024 * 1024) {
+      setCupomErro("O arquivo precisa ter até 5 MB.")
+      return
+    }
+    setCupomArquivo(arquivo)
+  }
+
+  const arquivoParaBase64 = (arquivo: File) =>
+    new Promise<string>((resolve, reject) => {
+      const leitor = new FileReader()
+      leitor.onload = () => resolve((leitor.result as string).split(",")[1] || "")
+      leitor.onerror = () => reject(leitor.error)
+      leitor.readAsDataURL(arquivo)
+    })
 
   const validar = () => {
     const novosErros: Record<string, string> = {}
@@ -100,10 +128,19 @@ function ConcursoCultural() {
     setStatus("enviando")
     setMensagemErro("")
     try {
+      let cupom: { nome: string; tipo: string; base64: string } | null = null
+      if (cupomArquivo) {
+        cupom = {
+          nome: cupomArquivo.name,
+          tipo: cupomArquivo.type,
+          base64: await arquivoParaBase64(cupomArquivo),
+        }
+      }
+
       const resposta = await fetch(CONCURSO_FORM_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, cupom }),
       })
       const dados = await resposta.json()
       if (dados.status === "ok") {
@@ -149,6 +186,15 @@ function ConcursoCultural() {
             Seguir o Instagram @cafezemaria é um convite para acompanhar o resultado —
             não é obrigatório e não conta ponto.
           </p>
+          <a
+            href="https://www.instagram.com/cafezemaria/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="concurso-instagram"
+          >
+            Seguir @cafezemaria no Instagram
+            <Icon className="h-4 w-4"><path d="M7 17 17 7M7 7h10v10" /></Icon>
+          </a>
         </div>
 
         <div className="concurso-form-wrap">
@@ -245,6 +291,21 @@ function ConcursoCultural() {
                 {erros.resposta && <span className="concurso-erro">{erros.resposta}</span>}
               </label>
 
+              <label>
+                Cupom fiscal da compra (opcional)
+                <input
+                  type="file"
+                  accept="image/*,.pdf"
+                  onChange={(e) => escolherCupom(e.target.files?.[0] ?? null)}
+                />
+                <span className="concurso-nota-campo">
+                  Não é obrigatório comprar para participar. Se você já comprou e quiser anexar o
+                  cupom, fique à vontade — isso é só informativo e não influencia a avaliação.
+                </span>
+                {cupomArquivo && <span className="concurso-contador">Selecionado: {cupomArquivo.name}</span>}
+                {cupomErro && <span className="concurso-erro">{cupomErro}</span>}
+              </label>
+
               <label className="concurso-checkbox">
                 <input
                   type="checkbox"
@@ -320,7 +381,10 @@ function ConcursoCultural() {
           <p>
             <strong>4. Como participar.</strong> Pelo formulário desta página, respondendo à
             pergunta "Qual é o seu método de preparo favorito e por quê?". A participação é
-            gratuita, sem necessidade de compra, e cada pessoa pode participar uma única vez.
+            gratuita, sem necessidade de compra, e cada pessoa pode participar uma única vez. O
+            formulário também permite anexar, de forma totalmente opcional, uma foto do cupom
+            fiscal de uma compra do Café Zé Maria — esse anexo é apenas informativo e não
+            influencia a avaliação nem é necessário para participar.
           </p>
           <p>
             <strong>5. Critérios de julgamento.</strong> As respostas serão avaliadas por
@@ -386,7 +450,8 @@ function ConcursoCultural() {
           </p>
           <p>
             <strong>Quais dados coletamos.</strong> Nome completo, e-mail, WhatsApp, @ do
-            Instagram (se informado), cidade/UF e a resposta que você enviar no formulário.
+            Instagram (se informado), cidade/UF, a resposta que você enviar no formulário e, se
+            você optar por anexar, a foto do cupom fiscal.
           </p>
           <p>
             <strong>Para que usamos.</strong> Para viabilizar sua participação neste concurso
