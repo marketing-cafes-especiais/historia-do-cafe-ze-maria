@@ -32,7 +32,7 @@ const sections = [
 
 // Cole aqui a URL do seu Google Apps Script (Web App) depois de publicá-lo.
 // Veja o passo a passo que a Claude te deu para criar essa URL.
-const CONCURSO_FORM_ENDPOINT = ""
+const CONCURSO_FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxdw98-iWMfd44Wacq5jMRgJGNje1aKnoRBWhG7U3q9DaNUcdp2Wer_4JnxEsNfU3FGSQ/exec"
 
 // Período de inscrição do concurso cultural (horário de Brasília).
 const CONCURSO_INICIO = new Date("2026-11-15T00:00:00-03:00")
