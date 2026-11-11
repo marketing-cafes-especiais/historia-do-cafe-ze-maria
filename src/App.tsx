@@ -124,9 +124,8 @@ function ConcursoCultural() {
       <SectionTitle
         number="06"
         eyebrow="Concurso cultural"
-        title="Conte como você prepara o seu café."
+        title="Participe por aqui: conte como você prepara o seu café e qual método mais gosta."
       >
-        Participe contando qual é o seu método de preparo favorito e por quê.
         Sem necessidade de compra — o ganhador é escolhido pela criatividade da resposta.
       </SectionTitle>
 
