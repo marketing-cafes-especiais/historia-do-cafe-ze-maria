@@ -308,10 +308,6 @@ function ConcursoCultural() {
                   accept="image/*,.pdf"
                   onChange={(e) => escolherCupom(e.target.files?.[0] ?? null)}
                 />
-                <span className="concurso-nota-campo">
-                  Não é obrigatório comprar para participar. Se você já comprou e quiser anexar o
-                  cupom, fique à vontade — isso é só informativo e não influencia a avaliação.
-                </span>
                 {cupomArquivo && <span className="concurso-contador">Selecionado: {cupomArquivo.name}</span>}
                 {cupomErro && <span className="concurso-erro">{cupomErro}</span>}
               </label>
