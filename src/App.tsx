@@ -182,19 +182,6 @@ function ConcursoCultural() {
             <strong>Kit barista completo para 1 ganhador(a)</strong>
             <span>Moedor de grãos, prensa francesa, balança eletrônica, copo dosador e spray</span>
           </div>
-          <p className="concurso-nota">
-            Seguir o Instagram @cafezemaria é um convite para acompanhar o resultado —
-            não é obrigatório e não conta ponto.
-          </p>
-          <a
-            href="https://www.instagram.com/cafezemaria/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="concurso-instagram"
-          >
-            Seguir @cafezemaria no Instagram
-            <Icon className="h-4 w-4"><path d="M7 17 17 7M7 7h10v10" /></Icon>
-          </a>
         </div>
 
         <div className="concurso-form-wrap">
@@ -302,7 +289,7 @@ function ConcursoCultural() {
               </label>
 
               <label>
-                Cupom fiscal da compra (opcional)
+                Cupom fiscal da compra
                 <input
                   type="file"
                   accept="image/*,.pdf"
