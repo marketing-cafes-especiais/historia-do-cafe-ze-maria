@@ -576,7 +576,6 @@ function SectionTitle({
 }
 
 function App() {
-  const [dark, setDark] = useState(false)
   const [heroIndex, setHeroIndex] = useState(0)
 
   useEffect(() => {
@@ -587,20 +586,6 @@ function App() {
     )
     return () => window.clearInterval(id)
   }, [])
-
-  useEffect(() => {
-    const stored = window.localStorage.getItem("ze-maria-theme")
-    setDark(
-      stored
-        ? stored === "dark"
-        : window.matchMedia("(prefers-color-scheme: dark)").matches,
-    )
-  }, [])
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = dark ? "dark" : "light"
-    window.localStorage.setItem("ze-maria-theme", dark ? "dark" : "light")
-  }, [dark])
 
   return (
     <main>
@@ -617,23 +602,6 @@ function App() {
               </a>
             ))}
           </nav>
-          <button
-            type="button"
-            className="theme-button"
-            aria-label={dark ? "Ativar modo claro" : "Ativar modo escuro"}
-            onClick={() => setDark((value) => !value)}
-          >
-            {dark ? (
-              <Icon>
-                <circle cx="12" cy="12" r="4" />
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41" />
-              </Icon>
-            ) : (
-              <Icon>
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
-              </Icon>
-            )}
-          </button>
         </div>
         <nav
           aria-label="Atalhos das seções"
