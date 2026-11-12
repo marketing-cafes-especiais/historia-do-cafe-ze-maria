@@ -35,7 +35,7 @@ const sections = [
 const CONCURSO_FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxdw98-iWMfd44Wacq5jMRgJGNje1aKnoRBWhG7U3q9DaNUcdp2Wer_4JnxEsNfU3FGSQ/exec"
 
 // Período de inscrição do concurso cultural (horário de Brasília).
-const CONCURSO_INICIO = new Date("2026-11-15T00:00:00-03:00")
+const CONCURSO_INICIO = new Date("2026-11-12T00:00:00-03:00")
 const CONCURSO_FIM = new Date("2027-01-05T23:59:59-03:00")
 
 type ConcursoFase = "antes" | "aberto" | "depois"
@@ -366,7 +366,7 @@ function ConcursoCultural() {
         <summary>Ver regulamento</summary>
         <div className="concurso-regulamento-texto">
           <p><strong>1. Empresa promotora.</strong> Cafe Ze Maria LTDA, CNPJ 11.756.868/0001-32.</p>
-          <p><strong>2. Período de participação.</strong> De 15/11/2026 a 05/01/2027.</p>
+          <p><strong>2. Período de participação.</strong> De 12/11/2026 a 05/01/2027.</p>
           <p>
             <strong>3. Quem pode participar.</strong> Pessoas maiores de 18 anos, residentes no
             Brasil. Não podem participar funcionários da Zé Maria e seus familiares.
