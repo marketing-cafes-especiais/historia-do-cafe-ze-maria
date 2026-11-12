@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent, type ReactNode } from "react"
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react"
 import zeMariaCafeEspecialLogo from "./assets/logo-ze-maria-cafe-especial.png"
 import heroFoto8 from "./assets/hero-bg-8.jpg"
 import heroFoto11 from "./assets/hero-bg-11.jpg"
@@ -60,6 +60,7 @@ function ConcursoCultural() {
   const [erros, setErros] = useState<Record<string, string>>({})
   const [cupomArquivo, setCupomArquivo] = useState<File | null>(null)
   const [cupomErro, setCupomErro] = useState("")
+  const cupomInputRef = useRef<HTMLInputElement>(null)
   const [form, setForm] = useState({
     nome: "",
     email: "",
@@ -182,6 +183,18 @@ function ConcursoCultural() {
             <strong>Kit barista completo para 1 ganhador(a)</strong>
             <span>Moedor de grãos, prensa francesa, balança eletrônica, copo dosador e spray</span>
           </div>
+          <a
+            href="https://www.instagram.com/cafezemaria/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="concurso-fact concurso-fact-instagram"
+          >
+            <p>Instagram</p>
+            <strong>
+              Seguir @cafezemaria
+              <Icon className="h-4 w-4"><path d="M7 17 17 7M7 7h10v10" /></Icon>
+            </strong>
+          </a>
         </div>
 
         <div className="concurso-form-wrap">
@@ -255,16 +268,6 @@ function ConcursoCultural() {
                 />
               </label>
 
-              <a
-                href="https://www.instagram.com/cafezemaria/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="concurso-instagram"
-              >
-                Seguir @cafezemaria no Instagram
-                <Icon className="h-4 w-4"><path d="M7 17 17 7M7 7h10v10" /></Icon>
-              </a>
-
               <label>
                 Cidade e UF
                 <input
@@ -291,10 +294,23 @@ function ConcursoCultural() {
               <label>
                 Cupom fiscal da compra
                 <input
+                  ref={cupomInputRef}
                   type="file"
                   accept="image/*,.pdf"
                   onChange={(e) => escolherCupom(e.target.files?.[0] ?? null)}
+                  className="concurso-upload-input"
                 />
+                <button
+                  type="button"
+                  className="concurso-upload-button"
+                  onClick={() => cupomInputRef.current?.click()}
+                >
+                  <Icon className="h-4 w-4">
+                    <path d="M12 16V4M12 4 7 9M12 4l5 5" />
+                    <path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" />
+                  </Icon>
+                  {cupomArquivo ? "Trocar arquivo" : "Escolher arquivo"}
+                </button>
                 {cupomArquivo && <span className="concurso-contador">Selecionado: {cupomArquivo.name}</span>}
                 {cupomErro && <span className="concurso-erro">{cupomErro}</span>}
               </label>
@@ -314,7 +330,7 @@ function ConcursoCultural() {
                   >
                     regulamento
                   </button>
-                  .
+                  . <span className="concurso-obrigatorio">(Obrigatório)</span>
                 </span>
               </label>
               {erros.aceiteRegulamento && <span className="concurso-erro">{erros.aceiteRegulamento}</span>}
@@ -334,7 +350,7 @@ function ConcursoCultural() {
                   >
                     LGPD
                   </button>
-                  .
+                  . <span className="concurso-obrigatorio">(Obrigatório)</span>
                 </span>
               </label>
               {erros.consentimentoLgpd && <span className="concurso-erro">{erros.consentimentoLgpd}</span>}

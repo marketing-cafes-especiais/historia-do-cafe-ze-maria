@@ -821,13 +821,11 @@ main { background: var(--paper); }
 .concurso-fact strong { display: block; font-size: 15px; }
 .concurso-fact span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
 .concurso-nota { margin: 4px 0 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
-.concurso-instagram {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  align-self: flex-start; margin-top: 10px; padding: 10px 16px; border: 1px solid var(--forest);
-  border-radius: 999px; background: transparent; color: var(--forest); font-size: 12px;
-  font-weight: 700;
+.concurso-fact-instagram {
+  display: block; text-decoration: none; color: inherit; transition: background-color .15s;
 }
-.concurso-instagram:hover { background: var(--forest); color: var(--cream); }
+.concurso-fact-instagram:hover { background: var(--card); }
+.concurso-fact-instagram strong { display: flex; align-items: center; gap: 6px; }
 
 .concurso-form-wrap { min-width: 0; }
 .concurso-aviso, .concurso-sucesso {
@@ -850,10 +848,14 @@ main { background: var(--paper); }
   font-family: inherit;
 }
 .concurso-form textarea { resize: vertical; min-height: 100px; }
-.concurso-form input[type="file"] {
-  padding: 9px 0; color: var(--ink); font-size: 12px; font-weight: 400;
-  text-transform: none; letter-spacing: normal; font-family: inherit;
+.concurso-upload-input { display: none; }
+.concurso-upload-button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  align-self: flex-start; padding: 11px 18px; border: 1px solid var(--forest);
+  border-radius: 999px; background: transparent; color: var(--forest); font-size: 12px;
+  font-weight: 700; text-transform: none; letter-spacing: normal; cursor: pointer; font-family: inherit;
 }
+.concurso-upload-button:hover { background: var(--forest); color: var(--cream); }
 .concurso-nota-campo {
   color: var(--muted); font-size: 11px; font-weight: 400; text-transform: none;
   letter-spacing: normal; line-height: 1.5;
@@ -870,6 +872,10 @@ main { background: var(--paper); }
   font-size: 13px; font-weight: 400; text-transform: none; letter-spacing: normal; color: var(--muted);
 }
 .concurso-checkbox input { margin-top: 3px; flex: none; width: 16px; height: 16px; }
+.concurso-obrigatorio {
+  color: var(--copper); font-weight: 700; font-size: 11px; text-transform: uppercase;
+  letter-spacing: .05em;
+}
 .concurso-link-regulamento {
   border: 0; background: none; padding: 0; color: var(--copper); font-weight: 700;
   text-decoration: underline; cursor: pointer; font: inherit;
