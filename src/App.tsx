@@ -178,7 +178,7 @@ function ConcursoCultural() {
             <p>Resultado</p>
             <strong>12/01/2027, no Instagram @cafezemaria</strong>
           </div>
-          <div className="concurso-fact">
+          <div className="concurso-fact concurso-fact-premio">
             <p>Prêmio</p>
             <strong>Kit barista completo para 1 ganhador(a)</strong>
             <span>Moedor de grãos, prensa francesa, balança eletrônica, copo dosador e spray</span>
@@ -664,7 +664,12 @@ function App() {
               </Icon>
             </a>
             <a href="#concurso" className="preparation-button kit">
-              <span aria-hidden="true">🎁</span>
+              <Icon className="h-4 w-4">
+                <rect x="3" y="8" width="18" height="4" rx="1" />
+                <path d="M12 8v13" />
+                <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
+                <path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5" />
+              </Icon>
               Quero ganhar o kit
             </a>
             <a href="#preparo" className="preparation-button compact">

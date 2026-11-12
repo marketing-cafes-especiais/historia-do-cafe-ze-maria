@@ -178,7 +178,7 @@ button { color: inherit; }
   margin: 10px 0 0; font-size: clamp(35px, 8vw, 62px); letter-spacing: -.055em;
   line-height: 1.04; font-weight: 600;
 }
-.section-intro { margin: 20px 0 0; max-width: 610px; color: var(--muted); line-height: 1.7; }
+.section-intro { margin: 20px 0 0; max-width: 610px; color: var(--muted); line-height: 1.7; text-wrap: pretty; }
 .section-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 54px; padding-top: 22px; border-top: 1px solid var(--line); }
 .quiet-link { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: 12px; font-weight: 700; }
 .next-link { margin-top: 0; }
@@ -347,7 +347,7 @@ button { color: inherit; }
   --ink: var(--forest-deep);
   --muted: #675c4f;
   --chocolate: var(--forest);
-  --copper: #a85d2b;
+  --copper: #9e5726;
   --line: rgba(33, 75, 58, .2);
   --soft-copper: #e9d5ae;
 }
@@ -815,17 +815,24 @@ main { background: var(--paper); }
   box-shadow: 5px 5px 0 color-mix(in srgb, var(--caramel) 55%, transparent);
 }
 .concurso-fact p {
-  margin: 0 0 4px; color: var(--copper); font-size: 10px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: .15em;
+  margin: 0 0 4px; color: var(--copper); font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .13em;
 }
 .concurso-fact strong { display: block; font-size: 15px; }
 .concurso-fact span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
 .concurso-nota { margin: 4px 0 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.concurso-fact-premio {
+  background: var(--forest); border-color: var(--forest); color: var(--cream);
+}
+.concurso-fact-premio p { color: #e9d5ae; }
+.concurso-fact-premio span { color: #cdbdb4; }
 .concurso-fact-instagram {
   display: block; text-decoration: none; color: inherit; transition: background-color .15s;
+  border-color: var(--caramel);
 }
 .concurso-fact-instagram:hover { background: var(--card); }
 .concurso-fact-instagram strong { display: flex; align-items: center; gap: 6px; }
+.concurso-fact-instagram:focus-visible { outline: 2px solid var(--caramel); outline-offset: 2px; }
 
 .concurso-form-wrap { min-width: 0; }
 .concurso-aviso, .concurso-sucesso {
@@ -871,7 +878,7 @@ main { background: var(--paper); }
   flex-direction: row !important; align-items: flex-start; gap: 10px !important;
   font-size: 13px; font-weight: 400; text-transform: none; letter-spacing: normal; color: var(--muted);
 }
-.concurso-checkbox input { margin-top: 3px; flex: none; width: 16px; height: 16px; }
+.concurso-checkbox input { margin-top: 0; flex: none; width: 24px; height: 24px; }
 .concurso-obrigatorio {
   color: var(--copper); font-weight: 700; font-size: 11px; text-transform: uppercase;
   letter-spacing: .05em;
