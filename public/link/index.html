@@ -60,7 +60,37 @@ header img{width:270px;max-width:80%;height:auto;display:block}
 .contato span{display:block;font-size:13px;margin-top:2px}
 .contato.escuro span{color:#C9CDDB}.contato.claro span{color:#4A5068}
 footer{text-align:center;font-size:12px;color:#4A5068;padding-top:8px}
-a:focus-visible{outline:3px solid #E39A62;outline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid #E39A62;outline-offset:3px}
+/* Onde encontrar (stories) */
+.onde{display:flex;flex-direction:column;gap:12px}
+.onde h2{margin:0;font-family:Marcellus,Georgia,serif;font-size:22px;font-weight:400}
+.onde p{margin:0;font-size:13px;color:#4A5068;line-height:1.4}
+.bolinhas{display:flex;gap:16px;overflow-x:auto;padding:4px 2px 6px;scrollbar-width:none}
+.bolinhas::-webkit-scrollbar{display:none}
+.bolinha{flex:0 0 auto;width:76px;display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;padding:0;cursor:pointer;font:inherit;color:#00092F}
+.bolinha .anel{width:72px;height:72px;border-radius:50%;padding:3px;background:conic-gradient(#A34E17,#E39A62,#A34E17)}
+.bolinha .anel img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid #fff;display:block}
+.bolinha.visto .anel{background:#C9CDDB}
+.bolinha span{font-size:12px;line-height:1.25;text-align:center}
+.viewer{position:fixed;inset:0;z-index:50;background:#000;display:none;justify-content:center}
+.viewer.aberto{display:flex}
+.palco{position:relative;width:100%;max-width:480px;height:100%;background:#000;overflow:hidden}
+.palco video,.palco img.midia{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.palco::before{content:"";position:absolute;left:0;right:0;top:0;height:120px;background:linear-gradient(rgba(0,0,0,.55),transparent);z-index:2;pointer-events:none}
+.barras{position:absolute;top:10px;left:10px;right:10px;display:flex;gap:4px;z-index:3}
+.barra{flex:1;height:3px;background:rgba(255,255,255,.35);border-radius:2px;overflow:hidden}
+.barra i{display:block;height:100%;width:0;background:#fff}
+.topo{position:absolute;top:22px;left:12px;right:12px;display:flex;align-items:center;gap:10px;z-index:3;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.topo img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff}
+.topo strong{font-size:14px;display:block}.topo small{font-size:12px;opacity:.85}
+.fechar{margin-left:auto;width:44px;height:44px;border:0;background:none;color:#fff;font-size:28px;cursor:pointer;line-height:1}
+.toque{position:absolute;top:70px;bottom:150px;width:40%;z-index:2;background:none;border:0;cursor:pointer}
+.toque.ant{left:0}.toque.prox{right:0;width:60%}
+.rodape{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:60px 16px 22px;background:linear-gradient(transparent,rgba(0,0,0,.75));display:flex;flex-direction:column;gap:10px}
+.rodape a{display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none}
+.rodape .chegar{background:#fff;color:#00092F}
+.rodape .vender{border:1.5px solid #fff;color:#fff}
+.rodape small{color:#fff;font-size:12px;opacity:.85;text-align:center}
 </style>
 </head>
 <body>
@@ -122,6 +152,12 @@ a:focus-visible{outline:3px solid #E39A62;outline-offset:3px}
     <div><strong>Tire suas dúvidas</strong><span>Fale com a gente no WhatsApp</span></div>
   </a>
 
+  <section class="onde" aria-labelledby="onde-titulo">
+    <h2 id="onde-titulo">Onde encontrar Zé Maria</h2>
+    <p>Mercados que já levam nossos cafés. Toque para ver.</p>
+    <div class="bolinhas" id="bolinhas"></div>
+  </section>
+
   <a class="contato claro" href="https://wa.me/5527997762348?text=Oi!%20Vim%20pelo%20Instagram%20e%20quero%20saber%20como%20revender%20os%20caf%C3%A9s%20Z%C3%A9%20Maria.">
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v11h16V9"/><path d="M3 9h18"/><path d="M9 20v-6h6v6"/></svg>
     <div><strong>Para mercados e cafeterias</strong><span>Quer revender Zé Maria? Fale com o comercial</span></div>
@@ -129,5 +165,142 @@ a:focus-visible{outline:3px solid #E39A62;outline-offset:3px}
 
   <footer>Café Zé Maria · Montanhas capixabas</footer>
 </main>
+
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Stories dos mercados">
+  <div class="palco" id="palco">
+    <div class="barras" id="barras"></div>
+    <div class="topo">
+      <img id="v-capa" src="" alt="">
+      <div><strong id="v-nome"></strong><small id="v-local"></small></div>
+      <button class="fechar" id="v-fechar" type="button" aria-label="Fechar">×</button>
+    </div>
+    <button class="toque ant" id="v-ant" type="button" aria-label="Anterior"></button>
+    <button class="toque prox" id="v-prox" type="button" aria-label="Próximo"></button>
+    <div class="rodape">
+      <a class="chegar" id="v-mapa" href="#" target="_blank" rel="noopener">Como chegar</a>
+      <a class="vender" href="https://wa.me/5527997762348?text=Oi!%20Vi%20os%20mercados%20que%20vendem%20Z%C3%A9%20Maria%20e%20quero%20revender%20tamb%C3%A9m.">Quer vender Zé Maria também?</a>
+      <small id="v-endereco"></small>
+    </div>
+  </div>
+</div>
+
+<script>
+// Para adicionar um mercado: copie um bloco { ... } e troque os dados e os arquivos em stories/.
+var MERCADOS = [
+  {
+    nome: "Sabor da Terra",
+    local: "Shopping Vitória · 2º piso",
+    endereco: "Av. Américo Buaiz, 200 - Enseada do Suá, Vitória - ES",
+    mapa: "https://www.google.com/maps/search/?api=1&query=Mercado%20Sabor%20da%20Terra%20Shopping%20Vit%C3%B3ria%20Av.%20Am%C3%A9rico%20Buaiz%20200%20Vit%C3%B3ria%20ES",
+    capa: "stories/sabor-bolinha.jpg",
+    midias: [
+      { tipo: "video", src: "stories/sabor-2.mp4", poster: "stories/sabor-2.jpg" },
+      { tipo: "foto", src: "stories/sabor-1-foto.jpg" },
+      { tipo: "video", src: "stories/sabor-3.mp4", poster: "stories/sabor-3.jpg" }
+    ]
+  }
+];
+
+(function () {
+  var FOTO_MS = 5000;
+  var lista = document.getElementById("bolinhas");
+  var viewer = document.getElementById("viewer");
+  var palco = document.getElementById("palco");
+  var barras = document.getElementById("barras");
+  var atual = 0, passo = 0, midiaEl = null, timer = null, inicio = 0, gatilho = null;
+
+  MERCADOS.forEach(function (m, i) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "bolinha";
+    b.setAttribute("aria-label", "Ver stories de " + m.nome);
+    b.innerHTML = '<span class="anel"><img alt="" src="' + m.capa + '"></span><span></span>';
+    b.lastChild.textContent = m.nome;
+    b.addEventListener("click", function () { gatilho = b; abrir(i); });
+    lista.appendChild(b);
+  });
+
+  function abrir(i) {
+    atual = i; passo = 0;
+    viewer.classList.add("aberto");
+    document.body.style.overflow = "hidden";
+    lista.children[i].classList.add("visto");
+    montar();
+    document.getElementById("v-fechar").focus();
+  }
+  function fechar() {
+    parar();
+    viewer.classList.remove("aberto");
+    document.body.style.overflow = "";
+    if (gatilho) gatilho.focus();
+  }
+  function parar() {
+    if (timer) cancelAnimationFrame(timer);
+    timer = null;
+    if (midiaEl) { if (midiaEl.pause) midiaEl.pause(); midiaEl.remove(); midiaEl = null; }
+  }
+  function montar() {
+    var m = MERCADOS[atual];
+    document.getElementById("v-capa").src = m.capa;
+    document.getElementById("v-nome").textContent = m.nome;
+    document.getElementById("v-local").textContent = m.local;
+    document.getElementById("v-endereco").textContent = m.endereco;
+    document.getElementById("v-mapa").href = m.mapa;
+    barras.innerHTML = "";
+    m.midias.forEach(function () { var d = document.createElement("div"); d.className = "barra"; d.appendChild(document.createElement("i")); barras.appendChild(d); });
+    mostrar();
+  }
+  function mostrar() {
+    parar();
+    var m = MERCADOS[atual], md = m.midias[passo];
+    Array.prototype.forEach.call(barras.children, function (b, k) { b.firstChild.style.width = k < passo ? "100%" : "0"; });
+    if (md.tipo === "video") {
+      var v = document.createElement("video");
+      v.src = md.src; v.poster = md.poster || "";
+      v.muted = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.preload = "auto";
+      v.addEventListener("ended", proximo);
+      midiaEl = v; palco.insertBefore(v, palco.firstChild);
+      var p = v.play(); if (p && p.catch) p.catch(function () {});
+    } else {
+      var img = document.createElement("img");
+      img.className = "midia"; img.src = md.src; img.alt = "";
+      midiaEl = img; palco.insertBefore(img, palco.firstChild);
+    }
+    inicio = performance.now();
+    progresso();
+  }
+  function progresso() {
+    var b = barras.children[passo];
+    if (!b || !midiaEl) return;
+    var frac;
+    if (midiaEl.tagName === "VIDEO") {
+      frac = midiaEl.duration ? midiaEl.currentTime / midiaEl.duration : 0;
+    } else {
+      frac = (performance.now() - inicio) / FOTO_MS;
+      if (frac >= 1) { proximo(); return; }
+    }
+    b.firstChild.style.width = Math.min(frac * 100, 100) + "%";
+    timer = requestAnimationFrame(progresso);
+  }
+  function proximo() {
+    if (passo < MERCADOS[atual].midias.length - 1) { passo++; mostrar(); }
+    else if (atual < MERCADOS.length - 1) { atual++; passo = 0; lista.children[atual].classList.add("visto"); montar(); }
+    else fechar();
+  }
+  function anterior() {
+    if (passo > 0) { passo--; mostrar(); }
+    else if (atual > 0) { atual--; passo = 0; montar(); }
+    else mostrar();
+  }
+  document.getElementById("v-prox").addEventListener("click", proximo);
+  document.getElementById("v-ant").addEventListener("click", anterior);
+  document.getElementById("v-fechar").addEventListener("click", fechar);
+  viewer.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") fechar();
+    else if (e.key === "ArrowRight") proximo();
+    else if (e.key === "ArrowLeft") anterior();
+  });
+})();
+</script>
 </body>
 </html>
