@@ -148,3 +148,6 @@
 # Mini site do link da bio: imagens pequenas, versionadas direto no git (sem LFS)
 public/link/img/** -filter -diff -merge binary
 public/link/stories/** -filter -diff -merge binary
+public/link/**/*.mp4 -filter -diff -merge binary
+public/link/**/*.jpg -filter -diff -merge binary
+public/link/**/*.webp -filter -diff -merge binary

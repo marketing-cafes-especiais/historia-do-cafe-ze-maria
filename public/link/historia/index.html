@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A história do Café Zé Maria</title>
+<meta name="description" content="Desde 1971 nas Montanhas Capixabas: a história da família Ovani e do Café Zé Maria, contada por Cleberson Ovani.">
+<meta name="theme-color" content="#00092F">
+<meta property="og:title" content="A história do Café Zé Maria">
+<meta property="og:description" content="Desde 1971 nas Montanhas Capixabas, em Itaguaçu (ES).">
+<meta property="og:image" content="https://marketing-cafes-especiais.github.io/historia-do-cafe-ze-maria/link/historia/historia-capa.jpg">
+<link rel="icon" href="../img/icone.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#FFFFFF;font-family:Inter,system-ui,sans-serif;color:#00092F;-webkit-font-smoothing:antialiased}
+a{color:#00092F}
+.page{width:100%;max-width:440px;margin:0 auto;display:flex;flex-direction:column;gap:22px;padding:16px 18px 32px}
+.barra-topo{display:flex;align-items:center;justify-content:space-between;min-height:44px}
+.voltar{font-size:14px;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.barra-topo img{height:34px;width:auto;display:block}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#A34E17}
+h1,h2{font-family:Marcellus,Georgia,serif;font-weight:400;margin:0}
+h2{font-size:22px;line-height:1.2}
+.capa{border-radius:20px;overflow:hidden;background:#00092F;color:#F7F5F1;display:flex;flex-direction:column}
+.capa img{width:100%;height:260px;object-fit:cover;object-position:60% 55%;display:block}
+.capa .corpo{padding:20px 20px 22px;display:flex;flex-direction:column;gap:8px}
+.capa .eyebrow{color:#E39A62}
+.capa h1{font-size:28px;line-height:1.15}
+.capa p{margin:0;font-size:14px;line-height:1.5;color:#C9CDDB}
+.secao{display:flex;flex-direction:column;gap:10px}
+.secao p{margin:0;font-size:15px;line-height:1.6;color:#2A3150}
+.video{position:relative;width:100%;aspect-ratio:9/16;max-height:80vh;border-radius:20px;overflow:hidden;background:#000}
+.video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ouvir{position:absolute;inset:0;width:100%;height:100%;background:transparent;border:0;cursor:pointer;display:flex;align-items:flex-end;justify-content:center;padding-bottom:28px}
+.ouvir span{display:flex;align-items:center;gap:10px;background:#A34E17;color:#fff;font:600 15px Inter,system-ui,sans-serif;padding:12px 20px;border-radius:999px;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+.mudo-btn{position:absolute;top:12px;right:12px;width:44px;height:44px;border-radius:50%;background:rgba(0,9,47,.6);border:0;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.legenda{font-size:12px;color:#4A5068}
+.fatos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.fato{background:#F4F1EC;border-radius:14px;padding:14px}
+.fato b{display:block;font-family:Marcellus,Georgia,serif;font-weight:400;font-size:24px}
+.fato span{display:block;font-size:12px;color:#4A5068;margin-top:2px}
+blockquote{margin:4px 0 0;padding:14px 16px;background:#F4F1EC;border-radius:14px;font-family:Marcellus,Georgia,serif;font-size:18px;line-height:1.35}
+blockquote span{display:block;font-family:Inter,system-ui,sans-serif;font-size:13px;color:#4A5068;margin-top:6px}
+.botoes{display:flex;flex-direction:column;gap:10px}
+.btn{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none}
+.btn.cheio{background:#00092F;color:#F7F5F1}
+.btn.linha{border:1.5px solid #00092F;color:#00092F}
+footer{text-align:center;font-size:12px;color:#4A5068;padding-top:8px}
+a:focus-visible,button:focus-visible{outline:3px solid #E39A62;outline-offset:3px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="barra-topo">
+    <a class="voltar" href="../">← Voltar</a>
+    <img src="../img/logo-ze-maria.jpg" alt="Zé Maria Café Especial">
+  </div>
+
+  <div class="capa">
+    <img src="../img/fazenda.jpg" alt="Secagem do café em terreiro suspenso na Fazenda José e Maria">
+    <div class="corpo">
+      <div class="eyebrow">Desde 1971</div>
+      <h1>A história do Café Zé Maria</h1>
+      <p>Cafés especiais da família Ovani, cultivados e colhidos à mão nas Montanhas Capixabas, em Itaguaçu (ES).</p>
+    </div>
+  </div>
+
+  <section class="secao">
+    <div class="eyebrow">Em vídeo</div>
+    <h2>Cleberson Ovani conta a história</h2>
+    <div class="video">
+      <video id="video" src="historia.mp4" poster="historia-capa.jpg" autoplay muted playsinline preload="metadata"></video>
+      <button class="ouvir" id="ouvir" type="button" aria-label="Ativar o som do vídeo">
+        <span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m23 9-6 6"/><path d="m17 9 6 6"/></svg>Toque para ouvir</span>
+      </button>
+      <button class="mudo-btn" id="mudo" type="button" aria-label="Desligar o som" hidden>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>
+      </button>
+    </div>
+    <div class="legenda">7 min · com legendas</div>
+  </section>
+
+  <div class="fatos">
+    <div class="fato"><b>1971</b><span>o começo da família no café</span></div>
+    <div class="fato"><b>1.040 m</b><span>de altitude na fazenda</span></div>
+    <div class="fato"><b>À mão</b><span>colheita fruto por fruto</span></div>
+    <div class="fato"><b>Top 50</b><span>cafés do Brasil no Coffee of the Year</span></div>
+  </div>
+
+  <section class="secao">
+    <div class="eyebrow">As raízes</div>
+    <h2>Uma família nas Montanhas Capixabas</h2>
+    <p>Tudo começou em 1971. A família Ovani, que havia chegado da Itália décadas antes, escolheu as montanhas de Itaguaçu para criar raízes. Com o tempo, aprendeu a conhecer a terra e a cultivar o café pela observação e pela dedicação diária, passando esse cuidado de geração em geração.</p>
+  </section>
+
+  <section class="secao">
+    <div class="eyebrow">O nome no pacote</div>
+    <h2>Quem foi Zé Maria</h2>
+    <p>José Maria Ovani era um pai dedicado, um trabalhador incansável e um apaixonado por café especial. O nome dele ficou em cada pacote. Hoje, o filho Cleberson Ovani conduz a fazenda com o mesmo zelo, em homenagem ao pai.</p>
+    <blockquote>“Em memória do meu querido pai, José Maria Ovani!”<span>— Cleberson Ovani</span></blockquote>
+  </section>
+
+  <section class="secao">
+    <div class="eyebrow">Da montanha à xícara</div>
+    <h2>Na Fazenda José e Maria</h2>
+    <p>As lavouras ficam a mais de mil metros de altitude, onde as noites são frias e o fruto amadurece mais devagar. A colheita é feita à mão, só com os frutos maduros. A torra fica com a Flor de Março, e cada lote é analisado por profissionais certificados, seguindo os padrões da SCA.</p>
+  </section>
+
+  <div class="botoes">
+    <a class="btn cheio" href="../#vitrine">Conhecer nossos cafés</a>
+    <a class="btn linha" href="https://marketing-cafes-especiais.github.io/historia-do-cafe-ze-maria/">Ver a história completa</a>
+  </div>
+
+  <footer>Café Zé Maria · Mais que um café. Um legado.</footer>
+</main>
+<script>
+(function () {
+  var v = document.getElementById("video");
+  var ouvir = document.getElementById("ouvir");
+  var mudo = document.getElementById("mudo");
+  v.muted = true;
+  ouvir.addEventListener("click", function () {
+    v.muted = false;
+    var p = v.play(); if (p && p.catch) p.catch(function () {});
+    ouvir.hidden = true; mudo.hidden = false;
+  });
+  mudo.addEventListener("click", function () {
+    v.muted = true;
+    mudo.hidden = true; ouvir.hidden = false;
+  });
+})();
+</script>
+</body>
+</html>

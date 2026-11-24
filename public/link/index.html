@@ -91,6 +91,13 @@ a:focus-visible,button:focus-visible{outline:3px solid #E39A62;outline-offset:3p
 .rodape .chegar{background:#fff;color:#00092F}
 .rodape .vender{border:1.5px solid #fff;color:#fff}
 .rodape small{color:#fff;font-size:12px;opacity:.85;text-align:center}
+.degust{text-decoration:none;color:#00092F;background:#F4F1EC;border-radius:16px;padding:16px 18px;display:flex;align-items:center;gap:14px;min-height:44px}
+.degust[hidden]{display:none}
+.degust-icone{width:46px;height:46px;border-radius:50%;background:#A34E17;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.degust-txt{display:flex;flex-direction:column;gap:2px;flex:1}
+.degust-ey{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#A34E17}
+.degust-tit{font-family:Marcellus,Georgia,serif;font-size:20px;line-height:1.15}
+.degust-sub{font-size:13px;color:#4A5068}
 </style>
 </head>
 <body>
@@ -100,6 +107,12 @@ a:focus-visible,button:focus-visible{outline:3px solid #E39A62;outline-offset:3p
     <img src="img/logo-ze-maria.jpg" alt="Zé Maria Café Especial" width="270" height="90">
     <p class="tagline">Cafés especiais da Família Ovani, direto das montanhas capixabas.</p>
   </header>
+
+  <a class="degust" id="card-degust" href="degustacao/" hidden>
+    <span class="degust-icone"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F7F5F1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h13v4a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3c-.5 1 .5 2 0 3M12 3c-.5 1 .5 2 0 3"/></svg></span>
+    <span class="degust-txt"><span class="degust-ey">Degustações</span><span class="degust-tit">Onde o Zé está hoje</span><span class="degust-sub" id="degust-sub">Veja onde provar nossos cafés esta semana</span></span>
+    <span aria-hidden="true" style="font-size:20px">→</span>
+  </a>
 
   <div class="card banner">
     <img class="cover" src="img/banner-coy.jpg" alt="Pacote Zé Maria com selo Top 50 Coffee of the Year nas mãos, com as montanhas ao fundo">
@@ -111,7 +124,7 @@ a:focus-visible,button:focus-visible{outline:3px solid #E39A62;outline-offset:3p
     </div>
   </div>
 
-  <a class="card historia" href="https://marketing-cafes-especiais.github.io/historia-do-cafe-ze-maria/">
+  <a class="card historia" href="historia/">
     <img class="cover" src="img/fazenda.jpg" alt="Secagem do café em terreiro suspenso na fazenda Zé Maria" loading="lazy">
     <div class="card-body">
       <div class="eyebrow">Desde 1971</div>
@@ -341,6 +354,19 @@ var MERCADOS = [
     else if (e.key === "ArrowRight") proximo();
     else if (e.key === "ArrowLeft") anterior();
   });
+})();
+</script>
+<script src="degustacao/agenda.js"></script>
+<script>
+(function () {
+  var lista = window.DEGUSTACOES || [], agora = new Date();
+  function fim(d) { var p = d.data.split("-"), t = d.fim.split(":"); return new Date(+p[0], +p[1] - 1, +p[2], +t[0], +t[1]); }
+  function ini(d) { var p = d.data.split("-"), t = d.inicio.split(":"); return new Date(+p[0], +p[1] - 1, +p[2], +t[0], +t[1]); }
+  var futuras = lista.filter(function (d) { return fim(d) > agora; });
+  if (!futuras.length) return;
+  document.getElementById("card-degust").hidden = false;
+  var hoje = futuras.filter(function (d) { var x = ini(d); return x.toDateString() === agora.toDateString(); });
+  if (hoje.length) document.getElementById("degust-sub").textContent = "Hoje: " + hoje[0].local;
 })();
 </script>
 </body>

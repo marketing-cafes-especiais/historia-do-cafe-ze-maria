@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Onde o Zé está hoje · Degustações Café Zé Maria</title>
+<meta name="description" content="Agenda de degustações dos cafés especiais Zé Maria: onde provar hoje e nos próximos dias.">
+<meta name="theme-color" content="#00092F">
+<meta property="og:title" content="Onde o Zé está hoje">
+<meta property="og:description" content="Agenda de degustações dos cafés especiais Zé Maria.">
+<meta property="og:image" content="https://marketing-cafes-especiais.github.io/historia-do-cafe-ze-maria/link/img/banner-coy.jpg">
+<link rel="icon" href="../img/icone.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#FFFFFF;font-family:Inter,system-ui,sans-serif;color:#00092F;-webkit-font-smoothing:antialiased}
+a{color:#00092F}
+.page{width:100%;max-width:440px;margin:0 auto;display:flex;flex-direction:column;gap:20px;padding:16px 18px 32px}
+.barra-topo{display:flex;align-items:center;justify-content:space-between;min-height:44px}
+.voltar{font-size:14px;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.barra-topo img{height:34px;width:auto;display:block}
+h1{margin:0;font-family:Marcellus,Georgia,serif;font-weight:400;font-size:30px;line-height:1.1}
+.sub{margin:6px 0 0;font-size:14px;color:#4A5068;line-height:1.45}
+h2{margin:0;font-family:Marcellus,Georgia,serif;font-weight:400;font-size:22px}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.hoje{border-radius:20px;overflow:hidden;background:#00092F;color:#F7F5F1;display:flex;flex-direction:column}
+.hoje .foto{width:100%;height:220px;object-fit:cover;display:block;background:#0B1A4A}
+.hoje .corpo{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px}
+.hoje .eyebrow{color:#E39A62;display:flex;align-items:center;gap:8px}
+.ao-vivo{width:8px;height:8px;border-radius:50%;background:#E39A62;box-shadow:0 0 0 0 rgba(227,154,98,.7);animation:pulso 1.6s infinite}
+@keyframes pulso{70%{box-shadow:0 0 0 8px rgba(227,154,98,0)}100%{box-shadow:0 0 0 0 rgba(227,154,98,0)}}
+@media (prefers-reduced-motion:reduce){.ao-vivo{animation:none}}
+.hoje .local{font-family:Marcellus,Georgia,serif;font-size:24px;line-height:1.15}
+.hoje .info{font-size:14px;line-height:1.5;color:#C9CDDB}
+.hoje .info a{color:#F7F5F1}
+.btn{display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;margin-top:6px}
+.hoje .btn{background:#F7F5F1;color:#00092F}
+.lista{display:flex;flex-direction:column;gap:12px}
+.item{display:flex;gap:12px;background:#F4F1EC;border-radius:16px;overflow:hidden}
+.item img{width:96px;min-height:120px;object-fit:cover;flex:0 0 auto;display:block;background:#E7E1D8}
+.item .corpo{padding:12px 12px 12px 0;display:flex;flex-direction:column;gap:3px;min-width:0}
+.item .quando{font-size:12px;font-weight:600;color:#A34E17;text-transform:uppercase;letter-spacing:.06em}
+.item .local{font-size:16px;font-weight:600;line-height:1.25}
+.item .info{font-size:13px;line-height:1.4;color:#4A5068}
+.item .chegar{font-size:13px;font-weight:600;margin-top:4px;display:inline-flex;min-height:32px;align-items:center}
+.vazio{background:#F4F1EC;border-radius:16px;padding:20px;font-size:14px;line-height:1.5;color:#4A5068}
+.vazio a{font-weight:600}
+.cta{display:flex;align-items:center;gap:14px;border:1.5px solid #00092F;border-radius:16px;padding:18px 20px;text-decoration:none;min-height:44px}
+.cta strong{display:block;font-size:16px}.cta span{display:block;font-size:13px;color:#4A5068;margin-top:2px}
+footer{text-align:center;font-size:12px;color:#4A5068;padding-top:8px}
+a:focus-visible{outline:3px solid #E39A62;outline-offset:3px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="barra-topo">
+    <a class="voltar" href="../">← Voltar</a>
+    <img src="../img/logo-ze-maria.jpg" alt="Zé Maria Café Especial">
+  </div>
+
+  <div>
+    <h1>Onde o Zé está hoje</h1>
+    <p class="sub">Degustações dos cafés Zé Maria em mercados e eventos. Passe para provar.</p>
+  </div>
+
+  <section id="bloco-hoje" hidden aria-labelledby="t-hoje">
+    <h2 id="t-hoje" class="eyebrow" style="font-family:Inter,system-ui,sans-serif;font-size:12px;color:#A34E17;margin-bottom:10px">Hoje</h2>
+    <div class="lista" id="hoje"></div>
+  </section>
+
+  <section id="bloco-proximas" hidden aria-labelledby="t-prox">
+    <h2 id="t-prox">Próximas degustações</h2>
+    <div class="lista" id="proximas" style="margin-top:12px"></div>
+  </section>
+
+  <div class="vazio" id="vazio" hidden>
+    Nenhuma degustação marcada no momento. Novas datas saem no Instagram
+    <a href="https://www.instagram.com/cafezemaria/">@cafezemaria</a>.
+  </div>
+
+  <a class="cta" href="https://wa.me/5527997762348?text=Oi!%20Vi%20a%20agenda%20de%20degusta%C3%A7%C3%B5es%20e%20quero%20levar%20o%20Z%C3%A9%20Maria%20para%20o%20meu%20mercado.">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v11h16V9"/><path d="M3 9h18"/><path d="M9 20v-6h6v6"/></svg>
+    <div><strong>Quer uma degustação no seu mercado?</strong><span>Fale com o comercial</span></div>
+  </a>
+
+  <footer>Café Zé Maria · Montanhas capixabas</footer>
+</main>
+
+<script src="agenda.js"></script>
+<script>
+var DEGUSTACOES = window.DEGUSTACOES || [];
+
+(function () {
+  var DIAS = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+  var MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+  function quando(d) { var p = d.data.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function hora(d, h) { var x = quando(d), t = h.split(":"); x.setHours(+t[0], +t[1], 0, 0); return x; }
+  function mapa(d) { return d.mapa || "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(d.local + " " + d.endereco); }
+  function horario(d) { return d.inicio.replace(":00", "h").replace(":", "h") + " às " + d.fim.replace(":00", "h").replace(":", "h"); }
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function linhaBarista(d, pai) {
+    if (!d.barista) return;
+    var p = el("div", "info"); p.appendChild(document.createTextNode("Com " + d.barista));
+    if (d.instagram) {
+      p.appendChild(document.createTextNode(" ("));
+      var a = el("a", null, "@" + d.instagram); a.href = "https://www.instagram.com/" + d.instagram + "/"; p.appendChild(a);
+      p.appendChild(document.createTextNode(")"));
+    }
+    pai.appendChild(p);
+  }
+
+  var agora = new Date();
+  var hojeIni = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate());
+  var futuras = DEGUSTACOES.filter(function (d) { return hora(d, d.fim) > agora; })
+    .sort(function (a, b) { return hora(a, a.inicio) - hora(b, b.inicio); });
+  var deHoje = futuras.filter(function (d) { return quando(d).getTime() === hojeIni.getTime(); });
+  var depois = futuras.filter(function (d) { return quando(d) > hojeIni; });
+
+  deHoje.forEach(function (d) {
+    var c = el("article", "hoje");
+    if (d.foto) { var i = el("img", "foto"); i.src = d.foto; i.alt = d.local; c.appendChild(i); }
+    var b = el("div", "corpo");
+    var ey = el("div", "eyebrow");
+    var acontecendo = agora >= hora(d, d.inicio);
+    if (acontecendo) ey.appendChild(el("span", "ao-vivo"));
+    ey.appendChild(document.createTextNode((acontecendo ? "Acontecendo agora · " : "Hoje · ") + horario(d)));
+    b.appendChild(ey);
+    b.appendChild(el("div", "local", d.local));
+    if (d.detalhe) b.appendChild(el("div", "info", d.detalhe));
+    if (d.cafe) b.appendChild(el("div", "info", "Café servido: " + d.cafe));
+    linhaBarista(d, b);
+    var bt = el("a", "btn", "Como chegar"); bt.href = mapa(d); bt.target = "_blank"; bt.rel = "noopener"; b.appendChild(bt);
+    c.appendChild(b);
+    document.getElementById("hoje").appendChild(c);
+  });
+
+  depois.forEach(function (d) {
+    var c = el("article", "item");
+    var i = el("img"); i.alt = ""; i.loading = "lazy"; if (d.foto) i.src = d.foto; c.appendChild(i);
+    var b = el("div", "corpo");
+    var dt = quando(d);
+    b.appendChild(el("div", "quando", DIAS[dt.getDay()] + ", " + dt.getDate() + " " + MESES[dt.getMonth()] + " · " + horario(d)));
+    b.appendChild(el("div", "local", d.local));
+    if (d.detalhe) b.appendChild(el("div", "info", d.detalhe));
+    if (d.cafe) b.appendChild(el("div", "info", "Café: " + d.cafe));
+    linhaBarista(d, b);
+    var a = el("a", "chegar", "Como chegar →"); a.href = mapa(d); a.target = "_blank"; a.rel = "noopener"; b.appendChild(a);
+    c.appendChild(b);
+    document.getElementById("proximas").appendChild(c);
+  });
+
+  document.getElementById("bloco-hoje").hidden = deHoje.length === 0;
+  document.getElementById("bloco-proximas").hidden = depois.length === 0;
+  document.getElementById("vazio").hidden = futuras.length > 0;
+})();
+</script>
+</body>
+</html>
