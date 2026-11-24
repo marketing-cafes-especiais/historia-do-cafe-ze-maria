@@ -295,6 +295,47 @@ var MERCADOS = [
   document.getElementById("v-prox").addEventListener("click", proximo);
   document.getElementById("v-ant").addEventListener("click", anterior);
   document.getElementById("v-fechar").addEventListener("click", fechar);
+  // Arrastar para baixo fecha, como no Instagram
+  var y0 = null, x0 = 0, dy = 0, arrastou = false;
+  palco.addEventListener("touchstart", function (e) {
+    if (e.touches.length !== 1) return;
+    y0 = e.touches[0].clientY; x0 = e.touches[0].clientX; dy = 0; arrastou = false;
+    palco.style.transition = "none";
+  }, { passive: true });
+  palco.addEventListener("touchmove", function (e) {
+    if (y0 === null) return;
+    dy = e.touches[0].clientY - y0;
+    var dx = Math.abs(e.touches[0].clientX - x0);
+    if (!arrastou && dy > 10 && dy > dx) {
+      arrastou = true;
+      if (midiaEl && midiaEl.pause) midiaEl.pause();
+    }
+    if (arrastou) {
+      e.preventDefault();
+      var d = Math.max(dy, 0);
+      palco.style.transform = "translateY(" + d + "px) scale(" + (1 - Math.min(d / 2000, 0.12)) + ")";
+      viewer.style.background = "rgba(0,0,0," + Math.max(1 - d / 500, 0.3) + ")";
+    }
+  }, { passive: false });
+  palco.addEventListener("touchend", function () {
+    if (y0 === null) return;
+    y0 = null;
+    if (!arrastou) return;
+    palco.style.transition = "transform .2s ease";
+    if (dy > 110) {
+      palco.style.transform = "translateY(100%)";
+      setTimeout(function () { fechar(); palco.style.transform = ""; palco.style.transition = ""; viewer.style.background = ""; }, 200);
+    } else {
+      palco.style.transform = "";
+      viewer.style.background = "";
+      if (midiaEl && midiaEl.play) { var p = midiaEl.play(); if (p && p.catch) p.catch(function () {}); }
+    }
+  });
+  // Evita que o arraste conte como toque de avançar/voltar
+  palco.addEventListener("click", function (e) {
+    if (arrastou) { e.stopPropagation(); e.preventDefault(); arrastou = false; }
+  }, true);
+
   viewer.addEventListener("keydown", function (e) {
     if (e.key === "Escape") fechar();
     else if (e.key === "ArrowRight") proximo();
