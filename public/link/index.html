@@ -108,7 +108,7 @@ a:focus-visible,button:focus-visible{outline:3px solid #E39A62;outline-offset:3p
     <p class="tagline">Cafés especiais da Família Ovani, direto das montanhas capixabas.</p>
   </header>
 
-  <a class="degust" id="card-degust" href="degustacao/" hidden>
+  <a class="degust" id="card-degust" href="degustacao/">
     <span class="degust-icone"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F7F5F1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h13v4a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3c-.5 1 .5 2 0 3M12 3c-.5 1 .5 2 0 3"/></svg></span>
     <span class="degust-txt"><span class="degust-ey">Degustações</span><span class="degust-tit">Onde o Zé está hoje</span><span class="degust-sub" id="degust-sub">Veja onde provar nossos cafés esta semana</span></span>
     <span aria-hidden="true" style="font-size:20px">→</span>
@@ -363,8 +363,7 @@ var MERCADOS = [
   function fim(d) { var p = d.data.split("-"), t = (d.fim || "23:59").split(":"); return new Date(+p[0], +p[1] - 1, +p[2], +t[0], +t[1]); }
   function ini(d) { var p = d.data.split("-"), t = d.inicio.split(":"); return new Date(+p[0], +p[1] - 1, +p[2], +t[0], +t[1]); }
   var futuras = lista.filter(function (d) { return fim(d) > agora; });
-  if (!futuras.length) return;
-  document.getElementById("card-degust").hidden = false;
+  if (!futuras.length) { document.getElementById("degust-sub").textContent = "Próximas datas em breve"; return; }
   var hoje = futuras.filter(function (d) { var x = ini(d); return x.toDateString() === agora.toDateString(); });
   if (hoje.length) document.getElementById("degust-sub").textContent = "Hoje: " + hoje[0].local;
 })();
