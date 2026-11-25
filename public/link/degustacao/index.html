@@ -89,11 +89,18 @@ a:focus-visible{outline:3px solid #E39A62;outline-offset:3px}
   <footer>Café Zé Maria · Montanhas capixabas</footer>
 </main>
 
-<script src="agenda.js"></script>
 <script>
-var DEGUSTACOES = window.DEGUSTACOES || [];
-
-(function () {
+// Carrega a agenda sempre atualizada (sem usar a cópia guardada no celular)
+function carregarAgenda(url, pronto) {
+  var s = document.createElement("script");
+  s.src = url + "?v=" + Date.now();
+  s.onload = pronto; s.onerror = pronto;
+  document.head.appendChild(s);
+}
+</script>
+<script>
+carregarAgenda("agenda.js", function () {
+  var DEGUSTACOES = window.DEGUSTACOES || [];
   var DIAS = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
   var MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
   function quando(d) { var p = d.data.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
@@ -157,7 +164,7 @@ var DEGUSTACOES = window.DEGUSTACOES || [];
   document.getElementById("bloco-hoje").hidden = deHoje.length === 0;
   document.getElementById("bloco-proximas").hidden = depois.length === 0;
   document.getElementById("vazio").hidden = futuras.length > 0;
-})();
+});
 </script>
 </body>
 </html>

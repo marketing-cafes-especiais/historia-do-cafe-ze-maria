@@ -367,9 +367,17 @@ var MERCADOS = [
   });
 })();
 </script>
-<script src="degustacao/agenda.js"></script>
 <script>
-(function () {
+// Carrega a agenda sempre atualizada (sem usar a cópia guardada no celular)
+function carregarAgenda(url, pronto) {
+  var s = document.createElement("script");
+  s.src = url + "?v=" + Date.now();
+  s.onload = pronto; s.onerror = pronto;
+  document.head.appendChild(s);
+}
+</script>
+<script>
+carregarAgenda("degustacao/agenda.js", function () {
   var lista = window.DEGUSTACOES || [], agora = new Date();
   function fim(d) { var p = d.data.split("-"), t = (d.fim || "23:59").split(":"); return new Date(+p[0], +p[1] - 1, +p[2], +t[0], +t[1]); }
   function ini(d) { var p = d.data.split("-"), t = d.inicio.split(":"); return new Date(+p[0], +p[1] - 1, +p[2], +t[0], +t[1]); }
@@ -377,7 +385,7 @@ var MERCADOS = [
   if (!futuras.length) { document.getElementById("degust-sub").textContent = "Próximas datas em breve"; return; }
   var hoje = futuras.filter(function (d) { var x = ini(d); return x.toDateString() === agora.toDateString(); });
   if (hoje.length) document.getElementById("degust-sub").textContent = "Hoje: " + hoje[0].local;
-})();
+});
 </script>
 </body>
 </html>
