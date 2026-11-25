@@ -90,6 +90,7 @@ a:focus-visible,button:focus-visible{outline:3px solid #E39A62;outline-offset:3p
 .rodape a{display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none}
 .rodape .chegar{background:#fff;color:#00092F}
 .rodape .vender{border:1.5px solid #fff;color:#fff}
+.rodape .destaque{align-self:center;background:#A34E17;color:#fff;font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px}
 .rodape small{color:#fff;font-size:12px;opacity:.85;text-align:center}
 .degust{text-decoration:none;color:#00092F;background:#F4F1EC;border-radius:16px;padding:16px 18px;display:flex;align-items:center;gap:14px;min-height:44px}
 .degust[hidden]{display:none}
@@ -190,6 +191,7 @@ a:focus-visible,button:focus-visible{outline:3px solid #E39A62;outline-offset:3p
     <button class="toque ant" id="v-ant" type="button" aria-label="Anterior"></button>
     <button class="toque prox" id="v-prox" type="button" aria-label="Próximo"></button>
     <div class="rodape">
+      <span class="destaque" id="v-destaque" hidden></span>
       <a class="chegar" id="v-mapa" href="#" target="_blank" rel="noopener">Como chegar</a>
       <a class="vender" href="https://wa.me/5527997762348?text=Oi!%20Vi%20os%20mercados%20que%20vendem%20Z%C3%A9%20Maria%20e%20quero%20revender%20tamb%C3%A9m.">Quer vender Zé Maria também?</a>
       <small id="v-endereco"></small>
@@ -221,6 +223,20 @@ var MERCADOS = [
     midias: [
       { tipo: "video", src: "stories/libano-1.mp4", poster: "stories/libano-1.jpg" },
       { tipo: "video", src: "stories/libano-2.mp4", poster: "stories/libano-2.jpg" }
+    ]
+  },
+  {
+    nome: "Simpático Café",
+    local: "Centro · Praça Princesa Isabel",
+    destaque: "Serve e vende Zé Maria",
+    endereco: "Edifício Jusmar - Centro, Vitória - ES, 29010-300",
+    mapa: "https://www.google.com/maps/search/?api=1&query=Simp%C3%A1tico%20Caf%C3%A9%20Edif%C3%ADcio%20Jusmar%20Centro%20Vit%C3%B3ria%20ES",
+    capa: "stories/simpatico-bolinha.jpg",
+    midias: [
+      { tipo: "video", src: "stories/simpatico-4.mp4", poster: "stories/simpatico-4.jpg" },
+      { tipo: "video", src: "stories/simpatico-2.mp4", poster: "stories/simpatico-2.jpg" },
+      { tipo: "video", src: "stories/simpatico-3.mp4", poster: "stories/simpatico-3.jpg" },
+      { tipo: "video", src: "stories/simpatico-1.mp4", poster: "stories/simpatico-1.jpg" }
     ]
   }
 ];
@@ -270,6 +286,7 @@ var MERCADOS = [
     document.getElementById("v-local").textContent = m.local;
     document.getElementById("v-endereco").textContent = m.endereco;
     document.getElementById("v-mapa").href = m.mapa;
+    var dq = document.getElementById("v-destaque"); dq.textContent = m.destaque || ""; dq.hidden = !m.destaque;
     barras.innerHTML = "";
     m.midias.forEach(function () { var d = document.createElement("div"); d.className = "barra"; d.appendChild(document.createElement("i")); barras.appendChild(d); });
     mostrar();
