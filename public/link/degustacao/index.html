@@ -99,7 +99,9 @@ var DEGUSTACOES = window.DEGUSTACOES || [];
   function quando(d) { var p = d.data.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
   function hora(d, h) { var x = quando(d), t = h.split(":"); x.setHours(+t[0], +t[1], 0, 0); return x; }
   function mapa(d) { return d.mapa || "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(d.local + " " + d.endereco); }
-  function horario(d) { return d.inicio.replace(":00", "h").replace(":", "h") + " às " + d.fim.replace(":00", "h").replace(":", "h"); }
+  function h(x) { return x.replace(/^0/, "").replace(":00", "h").replace(":", "h"); }
+  function horario(d) { return d.fim ? h(d.inicio) + " às " + h(d.fim) : "a partir das " + h(d.inicio); }
+  function termino(d) { return hora(d, d.fim || "23:59"); }
   function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
   function linhaBarista(d, pai) {
     if (!d.barista) return;
@@ -114,7 +116,7 @@ var DEGUSTACOES = window.DEGUSTACOES || [];
 
   var agora = new Date();
   var hojeIni = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate());
-  var futuras = DEGUSTACOES.filter(function (d) { return hora(d, d.fim) > agora; })
+  var futuras = DEGUSTACOES.filter(function (d) { return termino(d) > agora; })
     .sort(function (a, b) { return hora(a, a.inicio) - hora(b, b.inicio); });
   var deHoje = futuras.filter(function (d) { return quando(d).getTime() === hojeIni.getTime(); });
   var depois = futuras.filter(function (d) { return quando(d) > hojeIni; });
@@ -124,7 +126,7 @@ var DEGUSTACOES = window.DEGUSTACOES || [];
     if (d.foto) { var i = el("img", "foto"); i.src = d.foto; i.alt = d.local; c.appendChild(i); }
     var b = el("div", "corpo");
     var ey = el("div", "eyebrow");
-    var acontecendo = agora >= hora(d, d.inicio);
+    var acontecendo = !!d.fim && agora >= hora(d, d.inicio);
     if (acontecendo) ey.appendChild(el("span", "ao-vivo"));
     ey.appendChild(document.createTextNode((acontecendo ? "Acontecendo agora · " : "Hoje · ") + horario(d)));
     b.appendChild(ey);
@@ -139,7 +141,7 @@ var DEGUSTACOES = window.DEGUSTACOES || [];
 
   depois.forEach(function (d) {
     var c = el("article", "item");
-    var i = el("img"); i.alt = ""; i.loading = "lazy"; if (d.foto) i.src = d.foto; c.appendChild(i);
+    if (d.foto) { var i = el("img"); i.alt = ""; i.loading = "lazy"; i.src = d.foto; c.appendChild(i); } else { c.style.paddingLeft = "14px"; }
     var b = el("div", "corpo");
     var dt = quando(d);
     b.appendChild(el("div", "quando", DIAS[dt.getDay()] + ", " + dt.getDate() + " " + MESES[dt.getMonth()] + " · " + horario(d)));

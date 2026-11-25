@@ -360,7 +360,7 @@ var MERCADOS = [
 <script>
 (function () {
   var lista = window.DEGUSTACOES || [], agora = new Date();
-  function fim(d) { var p = d.data.split("-"), t = d.fim.split(":"); return new Date(+p[0], +p[1] - 1, +p[2], +t[0], +t[1]); }
+  function fim(d) { var p = d.data.split("-"), t = (d.fim || "23:59").split(":"); return new Date(+p[0], +p[1] - 1, +p[2], +t[0], +t[1]); }
   function ini(d) { var p = d.data.split("-"), t = d.inicio.split(":"); return new Date(+p[0], +p[1] - 1, +p[2], +t[0], +t[1]); }
   var futuras = lista.filter(function (d) { return fim(d) > agora; });
   if (!futuras.length) return;
