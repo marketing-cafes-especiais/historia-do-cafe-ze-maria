@@ -65,7 +65,7 @@ a:focus-visible,button:focus-visible{outline:3px solid #E39A62;outline-offset:3p
 .onde{display:flex;flex-direction:column;gap:12px}
 .onde h2{margin:0;font-family:Marcellus,Georgia,serif;font-size:22px;font-weight:400}
 .onde p{margin:0;font-size:13px;color:#4A5068;line-height:1.4}
-.bolinhas{display:flex;gap:16px;overflow-x:auto;padding:4px 2px 6px;scrollbar-width:none}
+.bolinhas{display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:16px 8px;justify-items:center;padding:4px 2px 6px}
 .bolinhas::-webkit-scrollbar{display:none}
 .bolinha{flex:0 0 auto;width:76px;display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;padding:0;cursor:pointer;font:inherit;color:#00092F}
 .bolinha .anel{width:72px;height:72px;border-radius:50%;padding:3px;background:conic-gradient(#A34E17,#E39A62,#A34E17)}
